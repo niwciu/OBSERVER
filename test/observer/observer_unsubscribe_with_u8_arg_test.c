@@ -22,9 +22,9 @@ TEST(observer_unsubscribe_with_u8_arg,
   static observer_cb_u8_arg_t expected[SYBSCRIPTION_CALBACKS_TABLE_SIZE] = {
       NULL};
 
-  subscribe_with_u8_arg(subscribtion, dummy_cb,
+  subscribe_u8(subscribtion, dummy_cb,
                         SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-  unsubscribe_with_u8_arg(subscribtion, dummy_cb,
+  unsubscribe_u8(subscribtion, dummy_cb,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -43,11 +43,11 @@ TEST(observer_unsubscribe_with_u8_arg,
   expected[3] = (&dummy_cb + (FUN_ADR_OFFSET * 4));
 
   for (int i = 0; i < 5; i++) {
-    subscribe_with_u8_arg(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * i)),
+    subscribe_u8(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * i)),
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
   }
 
-  unsubscribe_with_u8_arg(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * 2)),
+  unsubscribe_u8(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * 2)),
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -64,10 +64,10 @@ TEST(observer_unsubscribe_with_u8_arg,
     expected[i] = (&dummy_cb + (FUN_ADR_OFFSET * i));
 
   for (int i = 0; i < 5; i++)
-    subscribe_with_u8_arg(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * i)),
+    subscribe_u8(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * i)),
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
-  unsubscribe_with_u8_arg(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * 4)),
+  unsubscribe_u8(subscribtion, (&dummy_cb + (FUN_ADR_OFFSET * 4)),
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -90,7 +90,7 @@ TEST(observer_unsubscribe_with_u8_arg,
   expected[LAST_CB_TAB_ELEMENT - 1] = expected[LAST_CB_TAB_ELEMENT];
   expected[LAST_CB_TAB_ELEMENT] = NULL;
 
-  unsubscribe_with_u8_arg(subscribtion, unsubscr_fun,
+  unsubscribe_u8(subscribtion, unsubscr_fun,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -119,7 +119,7 @@ TEST(observer_unsubscribe_with_u8_arg,
   }
   expected[LAST_CB_TAB_ELEMENT] = NULL;
 
-  unsubscribe_with_u8_arg(subscribtion, unsubscr_fun,
+  unsubscribe_u8(subscribtion, unsubscr_fun,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -141,7 +141,7 @@ TEST(observer_unsubscribe_with_u8_arg,
   unsubscr_fun = expected[LAST_CB_TAB_ELEMENT];
   expected[LAST_CB_TAB_ELEMENT] = NULL;
 
-  unsubscribe_with_u8_arg(subscribtion, unsubscr_fun,
+  unsubscribe_u8(subscribtion, unsubscr_fun,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -166,7 +166,7 @@ TEST(observer_unsubscribe_with_u8_arg,
   expected[UNSUBSCR_FUNC_TAB_ELEMENT] = expected[UNSUBSCR_FUNC_TAB_ELEMENT + 1];
   expected[UNSUBSCR_FUNC_TAB_ELEMENT + 1] = NULL;
 
-  unsubscribe_with_u8_arg(subscribtion, unsubscr_fun,
+  unsubscribe_u8(subscribtion, unsubscr_fun,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -195,7 +195,7 @@ TEST(observer_unsubscribe_with_u8_arg,
   }
   expected[LAST_CB_TAB_ELEMENT] = NULL;
 
-  unsubscribe_with_u8_arg(subscribtion, unsubscr_fun,
+  unsubscribe_u8(subscribtion, unsubscr_fun,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -217,7 +217,7 @@ TEST(observer_unsubscribe_with_u8_arg,
   unsubscr_fun = expected[LAST_CB_TAB_ELEMENT - 1];
   expected[LAST_CB_TAB_ELEMENT - 1] = NULL;
 
-  unsubscribe_with_u8_arg(subscribtion, unsubscr_fun,
+  unsubscribe_u8(subscribtion, unsubscr_fun,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,
@@ -231,11 +231,11 @@ TEST(observer_unsubscribe_with_u8_arg,
   static uint32_t len = sizeof(observer_cb_u8_arg_t);
 
   for (uint8_t i = 0; i < SYBSCRIPTION_CALBACKS_TABLE_SIZE - 1; i++) {
-    subscribe_with_u8_arg(subscribtion, dummy_cb,
+    subscribe_u8(subscribtion, dummy_cb,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
   }
 
-  unsubscribe_with_u8_arg(subscribtion, dummy_cb,
+  unsubscribe_u8(subscribtion, dummy_cb,
                           SYBSCRIPTION_CALBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscribtion, len,

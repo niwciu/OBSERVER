@@ -40,15 +40,15 @@ TEST(
   static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {1, 1, 1};
 
   // Given
-  subscribe_with_arg(subscription, mock_fun_with_arg_1,
+  subscribe_enter_exit(subscription, mock_fun_with_arg_1,
                      SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_arg(subscription, mock_fun_with_arg_2,
+  subscribe_enter_exit(subscription, mock_fun_with_arg_2,
                      SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_arg(subscription, mock_fun_with_arg_3,
+  subscribe_enter_exit(subscription, mock_fun_with_arg_3,
                      SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
   // When
-  notify_with_arg(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,
+  notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,
                   EVENT_STATE_ENTER);
 
   // Then
@@ -61,21 +61,21 @@ TEST(observer_notice_with_arg,
   static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {2, 1, 2};
 
   // Given
-  subscribe_with_arg(subscription, mock_fun_with_arg_1,
+  subscribe_enter_exit(subscription, mock_fun_with_arg_1,
                      SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_arg(subscription, mock_fun_with_arg_2,
+  subscribe_enter_exit(subscription, mock_fun_with_arg_2,
                      SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_arg(subscription, mock_fun_with_arg_3,
+  subscribe_enter_exit(subscription, mock_fun_with_arg_3,
                      SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
-  notify_with_arg(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,
+  notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,
                   EVENT_STATE_ENTER);
 
-  unsubscribe_with_arg(subscription, mock_fun_with_arg_2,
+  unsubscribe_enter_exit(subscription, mock_fun_with_arg_2,
                        SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
   // When
-  notify_with_arg(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,
+  notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,
                   EVENT_STATE_EXIT);
 
   // Then

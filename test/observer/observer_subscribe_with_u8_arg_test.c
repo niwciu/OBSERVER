@@ -42,7 +42,7 @@ TEST(
       expected_subscription[SUBSCRIPTION_CALLBACKS_TABLE_SIZE] = {NULL};
   expected_subscription[0] = mock_fun_with_arg_1;
 
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+  subscribe_u8(subscription, mock_fun_with_arg_1,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription,
@@ -59,9 +59,9 @@ TEST(
   expected_subscription[0] = mock_fun_with_arg_1;
   expected_subscription[1] = mock_fun_with_arg_2;
 
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+  subscribe_u8(subscription, mock_fun_with_arg_1,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_2,
+  subscribe_u8(subscription, mock_fun_with_arg_2,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription,
@@ -79,11 +79,11 @@ TEST(
   expected_subscription[1] = mock_fun_with_arg_2;
   expected_subscription[2] = mock_fun_with_arg_3;
 
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+  subscribe_u8(subscription, mock_fun_with_arg_1,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_2,
+  subscribe_u8(subscription, mock_fun_with_arg_2,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_3,
+  subscribe_u8(subscription, mock_fun_with_arg_3,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription,
@@ -98,7 +98,7 @@ TEST(observer_subscribe_with_u8_arg,
   }
 
   TEST_ASSERT_EQUAL(CALLBACK_TABLE_FULL_ERROR,
-                    subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+                    subscribe_u8(subscription, mock_fun_with_arg_1,
                                           SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
 }
 
@@ -109,7 +109,7 @@ TEST(observer_subscribe_with_u8_arg,
   }
 
   TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK,
-                    subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+                    subscribe_u8(subscription, mock_fun_with_arg_1,
                                           SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
 }
 
@@ -120,11 +120,11 @@ TEST(observer_subscribe_with_u8_arg,
       expected_subscription[SUBSCRIPTION_CALLBACKS_TABLE_SIZE] = {NULL};
   expected_subscription[0] = mock_fun_with_arg_1;
 
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+  subscribe_u8(subscription, mock_fun_with_arg_1,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+  subscribe_u8(subscription, mock_fun_with_arg_1,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-  subscribe_with_u8_arg(subscription, mock_fun_with_arg_1,
+  subscribe_u8(subscription, mock_fun_with_arg_1,
                         SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
   TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription,
