@@ -1,0 +1,11 @@
+1. Copy Template folder and rename it according to module that gone be tested inside
+2. Update CMakeList.txt - lock at commented lines. 
+    #../../src/tested_module_folder/tested_module.c
+    #mock_module.c
+
+    they need/can be updated acordingly to project needs 
+3. Rename also otehr files starting from "template" acordingly to module that you will test inside
+4. edit all template files and replace word "template" acording to your needs
+5. build the setup using commands in header of CMakeLists.txt
+6. edit custom targets according to project/tested_module requirements/needs
+7. add reports folder to gitignore
