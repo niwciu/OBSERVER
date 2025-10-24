@@ -1,13 +1,10 @@
-/**
- * @file observer_public_types.h
- * @author niwciu (niwciu@gmail.com)
- * @brief
- * @version 1.0.0
- * @date 2025-10-20
+/* observer_public_types.h
+ * Author: niwciu (niwciu@gmail.com)
+ * Date: 2025-10-20 (updated)
  *
- * @copyright Copyright (c) 2025
- *
+ * Public types for observer module.
  */
+
 #ifndef OBSERVER_PUBLIC_TYPES_H_
 #define OBSERVER_PUBLIC_TYPES_H_
 
@@ -20,12 +17,17 @@ extern "C"
 
     /**
      * @brief Subscription operation status codes.
+     *
+     * Note:
+     *  - CALLBACK_SUBSCR_OK == 0 (success)
+     *  - CALLBACK_ERROR_INVALID_ARGUMENT indicates invalid input parameters (NULL pointers, zero size).
+     *  - CALLBACK_ERROR_TABLE_FULL indicates there were no free slots in the subscription table.
      */
     typedef enum
     {
         CALLBACK_SUBSCR_OK = 0u,
-        CALLBACK_TABLE_FULL_ERROR = 1u,
-        CALLBACK_TABLE_IDX_TO_HIGH = 2u
+        CALLBACK_ERROR_INVALID_ARGUMENT = 1u,
+        CALLBACK_ERROR_TABLE_FULL = 2u
     } subscr_status_e;
 
     /**

@@ -1,177 +1,94 @@
 #include "unity/fixture/unity_fixture.h"
 
-TEST_GROUP_RUNNER(observer_subscribe) {
-  RUN_TEST_CASE(
-      observer_subscribe,
-      GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty);
-  RUN_TEST_CASE(
-      observer_subscribe,
-      GivenSubscriptionTableEmptyWhenSubscribeMockFun1AndNextSubscribedMockFun2ToSubscriptionTableThenInElemnt0IsEqualMockFun1AdresElement1IsEqualMockFun2AdrAndRestElementsAreEmpty);
-  RUN_TEST_CASE(
-      observer_subscribe,
-      GivenSubscriptionTableEmptyWhenSubscribe3functionsThenFirst3CllbackTableElementsAreEqualToFunctionAdresssesAccordingToRegistrationOrderAndRestAreEqualNull);
-  RUN_TEST_CASE(
-      observer_subscribe,
-      GivenSubscriptionTableFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnSubscriptionTableFullStatus);
-  RUN_TEST_CASE(
-      observer_subscribe,
-      GivenSubscriptionTableNotFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnCallbackSubscribedOk);
-  RUN_TEST_CASE(
-      observer_subscribe,
-      GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThreeTimesThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty);
+TEST_GROUP_RUNNER(observer_subscribe)
+{
+    RUN_TEST_CASE(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty);
+    RUN_TEST_CASE(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1AndNextSubscribedMockFun2ToSubscriptionTableThenInElemnt0IsEqualMockFun1AdresElement1IsEqualMockFun2AdrAndRestElementsAreEmpty);
+    RUN_TEST_CASE(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribe3functionsThenFirst3CllbackTableElementsAreEqualToFunctionAdresssesAccordingToRegistrationOrderAndRestAreEqualNull);
+    RUN_TEST_CASE(observer_subscribe, GivenSubscriptionTableFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnSubscriptionTableFullStatus);
+    RUN_TEST_CASE(observer_subscribe, GivenSubscriptionTableNotFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnCallbackSubscribedOk);
+    RUN_TEST_CASE(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThreeTimesThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty);
 }
 
-TEST_GROUP_RUNNER(observer_subscribe_with_arg) {
-  RUN_TEST_CASE(
-      observer_subscribe_with_arg,
-      GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenFirstElementEqualsMockFun1AndRestAreEmpty);
-  RUN_TEST_CASE(
-      observer_subscribe_with_arg,
-      GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenMockFun2ThenCorrectOrderInTable);
-  RUN_TEST_CASE(
-      observer_subscribe_with_arg,
-      GivenSubscriptionTableEmptyWhenSubscribe3FunctionsThenFirst3ElementsSetAccordingToOrder);
-  RUN_TEST_CASE(
-      observer_subscribe_with_arg,
-      GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError);
-  RUN_TEST_CASE(observer_subscribe_with_arg,
-                GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk);
-  RUN_TEST_CASE(
-      observer_subscribe_with_arg,
-      GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled);
+TEST_GROUP_RUNNER(observer_subscribe_with_arg)
+{
+    RUN_TEST_CASE(observer_subscribe_with_arg, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenFirstElementEqualsMockFun1AndRestAreEmpty);
+    RUN_TEST_CASE(observer_subscribe_with_arg, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenMockFun2ThenCorrectOrderInTable);
+    RUN_TEST_CASE(observer_subscribe_with_arg, GivenSubscriptionTableEmptyWhenSubscribe3FunctionsThenFirst3ElementsSetAccordingToOrder);
+    RUN_TEST_CASE(observer_subscribe_with_arg, GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError);
+    RUN_TEST_CASE(observer_subscribe_with_arg, GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk);
+    RUN_TEST_CASE(observer_subscribe_with_arg, GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled);
 }
 
-TEST_GROUP_RUNNER(observer_subscribe_with_u8_arg) {
-  RUN_TEST_CASE(
-      observer_subscribe_with_u8_arg,
-      GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenFirstElementEqualsMockFun1AndRestAreEmpty);
-  RUN_TEST_CASE(
-      observer_subscribe_with_u8_arg,
-      GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenMockFun2ThenCorrectOrderInTable);
-  RUN_TEST_CASE(
-      observer_subscribe_with_u8_arg,
-      GivenSubscriptionTableEmptyWhenSubscribe3FunctionsThenFirst3ElementsSetAccordingToOrder);
-  RUN_TEST_CASE(
-      observer_subscribe_with_u8_arg,
-      GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError);
-  RUN_TEST_CASE(observer_subscribe_with_u8_arg,
-                GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk);
-  RUN_TEST_CASE(
-      observer_subscribe_with_u8_arg,
-      GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled);
+TEST_GROUP_RUNNER(observer_subscribe_with_u8_arg)
+{
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenFirstElementEqualsMockFun1AndRestAreEmpty);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ThenMockFun2ThenCorrectOrderInTable);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenSubscribe3FunctionsThenFirst3ElementsSetAccordingToOrder);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled);
 }
 
-TEST_GROUP_RUNNER(observer_unsubscribe) {
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenMocFun1FuncionSubscribedWhenMockFun1UnsubscribeThenSubscribtionTableEqualToExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenMocFun1ToMockFun5FuncionSubscribedWhenUnsubscribeMockFun3FunnctionCalledThenSubscribtionTableEqualToExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenMocFun1ToMockFun5FuncionSubscribedWhenUnsubscribeMockFun5FunnctionCalledThenSubscribtionTableEqualToExpected);
+TEST_GROUP_RUNNER(observer_unsubscribe)
+{
+    RUN_TEST_CASE(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenMockFun1UnsubscribeThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenMocFun1ToMockFun5FuncionSubscribedWhenUnsubscribeMockFun3FunnctionCalledThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenMocFun1ToMockFun5FuncionSubscribedWhenUnsubscribeMockFun5FunnctionCalledThenSubscribtionTableEqualToExpected);
 
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenSubscribtionTableFullWhenUnsubscribeOneBeforeLastFunctionThenSubscribtionTableEqualToExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenSubscribtionTableFullWhenUnsubscribe5thFunctionInCallbackTableThenSubscribtionTableEqualToExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenSubscribtionTableFullWhenUnsubscribeLastFunctionThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenSubscribtionTableFullWhenUnsubscribeOneBeforeLastFunctionThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenSubscribtionTableFullWhenUnsubscribe5thFunctionInCallbackTableThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenSubscribtionTableFullWhenUnsubscribeLastFunctionThenSubscribtionTableEqualToExpected);
 
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenSubscribtionTableWithLastElementEqualNullWhenUnsubscribeOneBeforeLastSubscribedFunctionThenSubscribtionTableEqualToExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenSubscribtionTableWithLastElementEqualNullWhenUnsubscribe5thSubscribedFunctionThenSubscribtionTableEqualToExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenSubscribtionTableWithLastElementEqualNullWhenUnsubscribeLastSubscribedFunctionThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenSubscribtionTableWithLastElementEqualNullWhenUnsubscribeOneBeforeLastSubscribedFunctionThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenSubscribtionTableWithLastElementEqualNullWhenUnsubscribe5thSubscribedFunctionThenSubscribtionTableEqualToExpected);
+    RUN_TEST_CASE(observer_unsubscribe, GivenSubscribtionTableWithLastElementEqualNullWhenUnsubscribeLastSubscribedFunctionThenSubscribtionTableEqualToExpected);
 
-  RUN_TEST_CASE(
-      observer_unsubscribe,
-      GivenSubscribtionTableFullWithMock1FunAdressesWhenMock1FunUnsubscribedThenSubscriptionTableIsEmpty);
+    RUN_TEST_CASE(observer_unsubscribe, GivenSubscribtionTableFullWithMock1FunAdressesWhenMock1FunUnsubscribedThenSubscriptionTableIsEmpty);
 }
 
-TEST_GROUP_RUNNER(observer_unsubscribe_with_arg) {
-  RUN_TEST_CASE(observer_unsubscribe_with_arg,
-                GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty);
-  RUN_TEST_CASE(observer_unsubscribe_with_arg,
-                GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_arg,
-                GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_arg,
-                GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_arg,
-                GivenTableFullWhenUnsub5thElementThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_arg,
-                GivenTableFullWhenUnsubLastElementThenTableEqualExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe_with_arg,
-      GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe_with_arg,
-      GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe_with_arg,
-      GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_arg,
-                GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty);
+TEST_GROUP_RUNNER(observer_unsubscribe_with_arg)
+{
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableFullWhenUnsub5thElementThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubLastElementThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty);
 }
 
-TEST_GROUP_RUNNER(observer_unsubscribe_with_u8_arg) {
-  RUN_TEST_CASE(observer_unsubscribe_with_u8_arg,
-                GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty);
-  RUN_TEST_CASE(observer_unsubscribe_with_u8_arg,
-                GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_u8_arg,
-                GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_u8_arg,
-                GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_u8_arg,
-                GivenTableFullWhenUnsub5thElementThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_u8_arg,
-                GivenTableFullWhenUnsubLastElementThenTableEqualExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe_with_u8_arg,
-      GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe_with_u8_arg,
-      GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected);
-  RUN_TEST_CASE(
-      observer_unsubscribe_with_u8_arg,
-      GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected);
-  RUN_TEST_CASE(observer_unsubscribe_with_u8_arg,
-                GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty);
+TEST_GROUP_RUNNER(observer_unsubscribe_with_u8_arg)
+{
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsub5thElementThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsubLastElementThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected);
+    RUN_TEST_CASE(observer_unsubscribe_with_u8_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty);
 }
 
-TEST_GROUP_RUNNER(observer_notice) {
-  RUN_TEST_CASE(
-      observer_notice,
-      GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThenSubscribedMockFunCountersEqual1);
-  RUN_TEST_CASE(
-      observer_notice,
-      GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedAndNoticeCalledAndMock2FunUnsubscribedWhenNoticeCalledThenSubscribedMockFun1AndMockFun3CountersEqual2AndMockFun2CounterEqual1);
+TEST_GROUP_RUNNER(observer_notice)
+{
+    RUN_TEST_CASE(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThenSubscribedMockFunCountersEqual1);
+    RUN_TEST_CASE(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedAndNoticeCalledAndMock2FunUnsubscribedWhenNoticeCalledThenSubscribedMockFun1AndMockFun3CountersEqual2AndMockFun2CounterEqual1);
 }
 
-TEST_GROUP_RUNNER(observer_notice_with_arg) {
-  RUN_TEST_CASE(
-      observer_notice_with_arg,
-      GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
-  RUN_TEST_CASE(
-      observer_notice_with_arg,
-      GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified);
+TEST_GROUP_RUNNER(observer_notice_with_arg)
+{
+    RUN_TEST_CASE(observer_notice_with_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
+    RUN_TEST_CASE(observer_notice_with_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified);
 }
 
-TEST_GROUP_RUNNER(observer_notice_with_u8_arg) {
-  RUN_TEST_CASE(
-      observer_notice_with_u8_arg,
-      GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
-  RUN_TEST_CASE(
-      observer_notice_with_u8_arg,
-      GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified);
+TEST_GROUP_RUNNER(observer_notice_with_u8_arg)
+{
+    RUN_TEST_CASE(observer_notice_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
+    RUN_TEST_CASE(observer_notice_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified);
 }
