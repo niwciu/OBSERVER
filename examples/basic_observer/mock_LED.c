@@ -44,11 +44,11 @@ static void toggle_mock_led_state(void)
     if (MOCK_LED_OFF == mock_LED_1)
     {
         mock_LED_1 = MOCK_LED_ON;
-        (void)printf("LED_STATE IS ON\r\n");
+        (void)printf("[MOCK_LED]: LED IS ON\r\n");
     }
     else
     {
         mock_LED_1 = MOCK_LED_OFF;
-        (void)printf("LED_STATE IS OFF\r\n");
+        (void)printf("[MOCK_LED]: LED IS OFF\r\n");
     }
 }

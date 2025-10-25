@@ -58,13 +58,14 @@ static void set_all_subscriptions(void)
 
 static void print_example_info(void)
 {
-    (void)printf("\r\n============================================================\r\n");
+    (void)printf("\r\n=================================================================\r\n");
     (void)printf("                     Basic Observer Example\r\n");
-    (void)printf("============================================================\r\n");
+    (void)printf("=================================================================\r\n");
     (void)printf(" Each press of 'c' key triggers a notification event.\r\n");
     (void)printf(" Observers (LCD and LED) react independently.\r\n\r\n");
-    (void)printf(" Demonstrates deterministic, MISRA-compliant observer pattern.\r\n");
-    (void)printf("============================================================\r\n");
-    (void)printf(" To stop, press Ctrl + Z\r\n");
-    (void)printf("============================================================\r\n");
+    (void)printf(" Demonstrates deterministic, MISRA-compliant observer pattern.\r\n\r\n");
+    (void)printf("=================================================================\r\n");
+    (void)printf(" To check how exaple works press c key\r\n");
+    (void)printf(" To stop, press Ctrl + Z\r\n\r\n");
+
 }

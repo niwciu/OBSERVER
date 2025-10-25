@@ -4,6 +4,7 @@
  */
 
 #include "mock_state_machine.h"
+#include "mock_display.h"
 #include <stdio.h>
 #include <unistd.h>
 

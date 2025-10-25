@@ -23,5 +23,5 @@ void set_mock_LCD_subscriptions(void)
 
 static void print_push_C_event_info(void)
 {
-    (void)printf("MOCK_LCD info: Key 'C' has been pushed\r\n");
+    (void)printf("[MOCK_LCD]: Key 'C' has been pressed\r\n");
 }
