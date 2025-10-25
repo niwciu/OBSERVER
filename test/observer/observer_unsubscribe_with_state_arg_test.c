@@ -13,18 +13,18 @@ static void dummy_cb(event_state_e arg)
     (void)arg;
 }
 
-TEST_GROUP(observer_unsubscribe_with_arg);
+TEST_GROUP(observer_unsubscribe_with_state_arg);
 
-TEST_SETUP(observer_unsubscribe_with_arg)
+TEST_SETUP(observer_unsubscribe_with_state_arg)
 {
     clear_subscription_table();
 }
 
-TEST_TEAR_DOWN(observer_unsubscribe_with_arg)
+TEST_TEAR_DOWN(observer_unsubscribe_with_state_arg)
 {
 }
 
-TEST(observer_unsubscribe_with_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty)
+TEST(observer_unsubscribe_with_state_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty)
 {
     static uint32_t len = sizeof(observer_cb_state_t);
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
@@ -35,7 +35,7 @@ TEST(observer_unsubscribe_with_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsE
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected)
 {
     static uint32_t len = sizeof(observer_cb_state_t);
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
@@ -55,7 +55,7 @@ TEST(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTable
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected)
 {
     static uint32_t len = sizeof(observer_cb_state_t);
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
@@ -71,7 +71,7 @@ TEST(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTable
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected)
 {
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     static observer_cb_state_t unsubscr_fun;
@@ -92,7 +92,7 @@ TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubOneBeforeLastThenTabl
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsub5thElementThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenTableFullWhenUnsub5thElementThenTableEqualExpected)
 {
 #define UNSUBSCR_CB_TABLE_ELEMENT 4U
 
@@ -119,7 +119,7 @@ TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsub5thElementThenTableEq
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubLastElementThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenTableFullWhenUnsubLastElementThenTableEqualExpected)
 {
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     static observer_cb_state_t unsubscr_fun;
@@ -139,7 +139,7 @@ TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubLastElementThenTableE
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected)
 {
 #define UNSUBSCR_FUNC_TAB_ELEMENT (LAST_CB_TAB_ELEMENT - 2)
 
@@ -162,7 +162,7 @@ TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubOneBeforeLast
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected)
 {
 #define UNSUBSCR_CB_TABLE_ELEMENT 4U
 
@@ -189,7 +189,7 @@ TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsub5thFunctionTh
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected)
+TEST(observer_unsubscribe_with_state_arg, GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected)
 {
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     static observer_cb_state_t unsubscr_fun;
@@ -209,7 +209,7 @@ TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubLastSubscribe
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty)
+TEST(observer_unsubscribe_with_state_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty)
 {
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     static uint32_t len = sizeof(observer_cb_state_t);
@@ -222,6 +222,47 @@ TEST(observer_unsubscribe_with_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsE
     unsubscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+}
+
+/* SUBSCRIBE RET VALUE test cases to run */
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeMockFun1FromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
+{
+    // Given
+    subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
+}
+
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeMockFun1FromSubscriptionTableWitZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+{
+    // Given
+    subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe_state_change(subscription, dummy_cb, 0);
+    // Then
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+}
+
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeNullPtrFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+{
+    // Given
+    subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe_state_change(subscription, NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+}
+
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeMockFun1FromNullPtrSubscrTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+{
+    // Given
+    subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe_state_change(NULL, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 static void clear_subscription_table(void)
