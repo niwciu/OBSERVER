@@ -59,11 +59,14 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 
 | Example         | Description                                                            | Folder                                     |
 | --------------- | ---------------------------------------------------------------------- | ------------------------------------------ |
-| Basic Observer  | Simple callback example using pushbutton, LED and LCD mocks            | [example_basic](examples/example_basic/)   |
-| State Observer  | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [example_state](examples/example_state/)   |
-| Sensor Observer | Observer with `uint8_t` argument demonstrating periodic sensor updates | [example_u8_arg](examples/example_u8_arg/) |
+| Basic Observer  | Simple callback example using pushbutton, LED and LCD mocks            | [basic_observer_example](examples/basic_observer/)   |
+| State Observer  | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [state_observer_example](examples/state_observer/)   |
+| Sensor Observer | Observer with `uint8_t` argument demonstrating periodic sensor updates | [observer_notify_u8_arg_example](examples/observer_u8/) |
 
-> Each folder contains a complete `src/` with all C/H files and a `README.md` describing usage, expected output, and safety notes.
+> Each folder contains a complete `src/` with all C/H files and a common `README.md` with detailed instructions, expected output, and safety notes.  
+> For full information on building, running, and understanding the examples, see the [Examples Details README](examples/README.md).
+
+
 
 ---
 
