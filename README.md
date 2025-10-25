@@ -6,14 +6,15 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 
 ---
 
-![GitHub License](https://img.shields.io/github/license/niwciu/OBSERVER_LIB)
-![GitHub top language](https://img.shields.io/github/languages/top/niwciu/OBSERVER_LIB)
-![GitHub Release](https://img.shields.io/github/v/release/niwciu/OBSERVER_LIB)
-![GitHub branch check runs](https://img.shields.io/github/check-runs/niwciu/OBSERVER_LIB/main)
-![CI Pipeline](https://github.com/niwciu/OBSERVER_LIB/actions/workflows/CI_Pipeline.yml/badge.svg)
+![GitHub License](https://img.shields.io/github/license/niwciu/OBSERVER)
+![GitHub top language](https://img.shields.io/github/languages/top/niwciu/OBSERVER)
+![GitHub Release](https://img.shields.io/github/v/release/niwciu/OBSERVER)
+![GitHub branch check runs](https://img.shields.io/github/check-runs/niwciu/OBSERVER/main)
+![CI Pipeline](https://github.com/niwciu/OBSERVER/actions/workflows/CI_Pipeline.yml/badge.svg)
 ![MISRA](https://img.shields.io/badge/MISRA-C%3A2012-blue)
 
-<b><a href='https://niwciu.github.io/OBSERVER_LIB/reports/gcovr.html'>Library GCOVR Report</a></b> <b><a href='https://niwciu.github.io/OBSERVER_LIB/reports/code_complexity_report.html'>Library Code Complexity Report</a></b>
+<b><a href='https://niwciu.github.io/OBSERVER/reports/gcovr.html'>Library GCOVR Report</a></b> <br>
+<b><a href='https://niwciu.github.io/OBSERVER/reports/code_complexity_report.html'>Library Code Complexity Report</a></b>
 
 ---
 

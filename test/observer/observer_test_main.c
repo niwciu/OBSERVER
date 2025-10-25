@@ -12,12 +12,12 @@ int main(int argc, const char **argv)
 static void run_all_tests(void)
 {
     RUN_TEST_GROUP(observer_subscribe);
-    RUN_TEST_GROUP(observer_subscribe_with_arg);
+    RUN_TEST_GROUP(observer_subscribe_with_state_arg);
     RUN_TEST_GROUP(observer_subscribe_with_u8_arg);
     RUN_TEST_GROUP(observer_unsubscribe);
-    RUN_TEST_GROUP(observer_unsubscribe_with_arg);
+    RUN_TEST_GROUP(observer_unsubscribe_with_state_arg);
     RUN_TEST_GROUP(observer_unsubscribe_with_u8_arg);
-    RUN_TEST_GROUP(observer_notice);
-    RUN_TEST_GROUP(observer_notice_with_arg);
-    RUN_TEST_GROUP(observer_notice_with_u8_arg);
+    RUN_TEST_GROUP(observer_notify);
+    RUN_TEST_GROUP(observer_notify_with_state_arg);
+    RUN_TEST_GROUP(observer_notify_with_u8_arg);
 }
