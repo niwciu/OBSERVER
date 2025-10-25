@@ -13,7 +13,8 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 ![CI Pipeline](https://github.com/niwciu/OBSERVER_LIB/actions/workflows/CI_Pipeline.yml/badge.svg)
 ![MISRA](https://img.shields.io/badge/MISRA-C%3A2012-blue)
 
-<b><a href='https://niwciu.github.io/OBSERVER_LIB/reports/gcovr.html'>Library GCOVR Report</a></b> <b><a href='https://niwciu.github.io/OBSERVER_LIB/reports/code_complexity_report.html'>Library Code Complexity Report</a></b>
+<b><a href='https://niwciu.github.io/OBSERVER_LIB/reports/gcovr.html'>Library GCOVR Report</a></b> <br>
+<b><a href='https://niwciu.github.io/OBSERVER_LIB/reports/code_complexity_report.html'>Library Code Complexity Report</a></b>
 
 ---
 
