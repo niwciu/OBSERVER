@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Strona główna
+title: Main Page
 ---
 
 {% include_relative README.md %}
