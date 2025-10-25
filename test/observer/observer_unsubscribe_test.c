@@ -272,7 +272,7 @@ TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1F
     // When
     subscr_status_e ret_status = unsubscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
 }
 
 TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1FromSubscriptionTableWitZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
@@ -282,7 +282,7 @@ TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1F
     // When
     subscr_status_e ret_status = unsubscribe(subscription, mock_fun_1, 0);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeNullPtrFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
@@ -292,7 +292,7 @@ TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeNullPtrFr
     // When
     subscr_status_e ret_status = unsubscribe(subscription, NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1FromNullPtrSubscrTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
@@ -302,7 +302,7 @@ TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1F
     // When
     subscr_status_e ret_status = unsubscribe(NULL, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 // TEST(observer_unsubscribe, )

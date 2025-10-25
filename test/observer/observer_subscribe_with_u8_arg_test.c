@@ -89,7 +89,7 @@ TEST(observer_subscribe_with_u8_arg, GivenFullTableWhenSubscribeAnotherCallbackT
         subscription[i] = mock_dirty_fun_with_u8_arg;
     }
 
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_TABLE_FULL, subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
 }
 
 TEST(observer_subscribe_with_u8_arg, GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk)
@@ -99,7 +99,7 @@ TEST(observer_subscribe_with_u8_arg, GivenNotFullTableWhenSubscribeThenReturnCal
         subscription[i] = mock_dirty_fun_with_u8_arg;
     }
 
-    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
+    TEST_ASSERT_EQUAL(OBSERVER_OK, subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
 }
 
 TEST(observer_subscribe_with_u8_arg, GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled)
@@ -122,7 +122,7 @@ TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToSubscriptionTableW
     // When
     subscr_status_e ret_status = subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
 }
 
 TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToSubscriptionTableWith0LenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
@@ -131,7 +131,7 @@ TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToSubscriptionTableW
     // When
     subscr_status_e ret_status = subscribe_u8(subscription, mock_fun_with_u8_arg_1, 0);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8NullToSubscriptionTableWithWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
@@ -140,7 +140,7 @@ TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8NullToSubscriptionTableWithW
     // When
     subscr_status_e ret_status = subscribe_u8(subscription, NULL, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToNullPtrSubscriptionTableWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
@@ -149,7 +149,7 @@ TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToNullPtrSubscriptio
     // When
     subscr_status_e ret_status = subscribe_u8(NULL, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 static void clear_subscription_table(void)

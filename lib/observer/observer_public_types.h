@@ -19,16 +19,16 @@ extern "C"
      * @brief Subscription operation status codes.
      *
      * Note:
-     *  - CALLBACK_SUBSCR_OK == 0 (success)
-     *  - CALLBACK_ERROR_INVALID_ARGUMENT indicates invalid input parameters (NULL pointers, zero size).
-     *  - CALLBACK_ERROR_TABLE_FULL indicates there were no free slots in the subscription table.
+     *  - OBSERVER_OK == 0 (success)
+     *  - SUBSCR_ERROR_INVALID_ARGUMENT indicates invalid input parameters (NULL pointers, zero size).
+     *  - SUBSCR_ERROR_TABLE_FULL indicates there were no free slots in the subscription table.
      */
     typedef enum
     {
-        CALLBACK_SUBSCR_OK = 0u,
-        CALLBACK_ERROR_INVALID_ARGUMENT = 1u,
-        CALLBACK_ERROR_TABLE_FULL = 2u,
-        CALLBACK_ERROR_NOT_FOUND = 3u
+        OBSERVER_OK = 0u,
+        SUBSCR_ERROR_INVALID_ARGUMENT = 1u,
+        SUBSCR_ERROR_TABLE_FULL = 2u,
+        CALLBACK_NOT_FOUND_ERROR = 3u
     } subscr_status_e;
 
     /**

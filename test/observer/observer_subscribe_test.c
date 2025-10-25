@@ -72,7 +72,7 @@ TEST(observer_subscribe, GivenSubscriptionTableFullWhenSubscribeMockFun1ToSubscr
     }
     // When
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_TABLE_FULL, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
     // Then
 }
 
@@ -85,7 +85,7 @@ TEST(observer_subscribe, GivenSubscriptionTableNotFullWhenSubscribeMockFun1ToSub
     }
     // When
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
+    TEST_ASSERT_EQUAL(OBSERVER_OK, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
 }
 
 TEST(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThreeTimesThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty)
@@ -117,7 +117,7 @@ TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWitnNonZeroLeng
     // When
     subscr_status_e ret_status = subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
 }
 
 TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWith0LenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
@@ -126,7 +126,7 @@ TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWith0LenghtThen
     // When
     subscr_status_e ret_status = subscribe(subscription, mock_fun_1, 0);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 TEST(observer_subscribe, WhenSubscribeNullToSubscriptionTableWithWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
@@ -135,7 +135,7 @@ TEST(observer_subscribe, WhenSubscribeNullToSubscriptionTableWithWitnNonZeroLeng
     // When
     subscr_status_e ret_status = subscribe(subscription, NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
 TEST(observer_subscribe, WhenSubscribeMockFun1ToNullPtrSubscriptionTableWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
@@ -144,6 +144,6 @@ TEST(observer_subscribe, WhenSubscribeMockFun1ToNullPtrSubscriptionTableWitnNonZ
     // When
     subscr_status_e ret_status = subscribe(NULL, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 

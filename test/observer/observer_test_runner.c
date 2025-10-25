@@ -85,6 +85,7 @@ TEST_GROUP_RUNNER(observer_unsubscribe_with_arg)
     RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected);
     RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected);
     RUN_TEST_CASE(observer_unsubscribe_with_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty);
+
 }
 
 TEST_GROUP_RUNNER(observer_unsubscribe_with_u8_arg)
