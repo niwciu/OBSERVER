@@ -90,22 +90,26 @@ subscr_status_e unsubscribe(observer_cb_t *subscription_table, observer_cb_t cb_
 
     return status;
 }
-void notify(observer_cb_t *subscription_table, uint8_t subscription_table_size)
+
+subscr_status_e notify(observer_cb_t *subscription_table, uint8_t subscription_table_size)
 {
-    uint8_t i;
+    subscr_status_e status = CALLBACK_ERROR_INVALID_ARGUMENT;
 
-    if ((subscription_table == NULL) || (subscription_table_size == 0u))
+    if ((subscription_table != NULL) && (subscription_table_size != 0u))
     {
-        return;
-    }
+        status = CALLBACK_ERROR_NOT_FOUND;
 
-    for (i = 0u; i < subscription_table_size; ++i)
-    {
-        if (subscription_table[i] != NULL)
+        for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
-            subscription_table[i]();
+            if (subscription_table[i] != NULL)
+            {
+                subscription_table[i]();
+                status = CALLBACK_SUBSCR_OK;
+            }
         }
     }
+
+    return status;
 }
 
 /* =========================================================================
@@ -175,22 +179,26 @@ subscr_status_e unsubscribe_state_change(observer_cb_state_t *subscription_table
 
     return status;
 }
-void notify_enter_exit(observer_cb_state_t *subscription_table, uint8_t subscription_table_size, event_state_e state)
+
+subscr_status_e notify_enter_exit(observer_cb_state_t *subscription_table, uint8_t subscription_table_size, event_state_e state)
 {
-    uint8_t i;
+    subscr_status_e status = CALLBACK_ERROR_INVALID_ARGUMENT;
 
-    if ((subscription_table == NULL) || (subscription_table_size == 0u))
+    if ((subscription_table != NULL) && (subscription_table_size != 0u))
     {
-        return;
-    }
+        status = CALLBACK_ERROR_NOT_FOUND;
 
-    for (i = 0u; i < subscription_table_size; ++i)
-    {
-        if (subscription_table[i] != NULL)
+        for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
-            subscription_table[i](state);
+            if (subscription_table[i] != NULL)
+            {
+                subscription_table[i](state);
+                status = CALLBACK_SUBSCR_OK;
+            }
         }
     }
+
+    return status;
 }
 
 /* =========================================================================
@@ -260,20 +268,24 @@ subscr_status_e unsubscribe_u8(observer_cb_u8_arg_t *subscription_table, observe
     return status;
 }
 
-void notify_u8(observer_cb_u8_arg_t *subscription_table, uint8_t subscription_table_size, uint8_t data)
+subscr_status_e notify_u8(observer_cb_u8_arg_t *subscription_table, uint8_t subscription_table_size, uint8_t data)
 {
-    uint8_t i;
+    subscr_status_e status = CALLBACK_ERROR_INVALID_ARGUMENT;
 
-    if ((subscription_table == NULL) || (subscription_table_size == 0u))
+    if ((subscription_table != NULL) && (subscription_table_size != 0u))
     {
-        return;
-    }
+        status = CALLBACK_ERROR_NOT_FOUND;
 
-    for (i = 0u; i < subscription_table_size; ++i)
-    {
-        if (subscription_table[i] != NULL)
+        for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
-            subscription_table[i](data);
+            if (subscription_table[i] != NULL)
+            {
+                subscription_table[i](data);
+                status = CALLBACK_SUBSCR_OK;
+            }
         }
     }
+
+    return status;
 }
+
