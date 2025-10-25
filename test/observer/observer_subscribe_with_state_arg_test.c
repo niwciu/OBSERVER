@@ -157,5 +157,3 @@ static void mock_reset_mock_fun_with_arg_counters(void)
         mock_fun_with_arg_counter[i] = 0;
     }
 }
-
-

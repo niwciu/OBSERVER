@@ -134,4 +134,3 @@ TEST(observer_subscribe, WhenSubscribeMockFun1ToNullPtrSubscriptionTableWitnNonZ
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
-

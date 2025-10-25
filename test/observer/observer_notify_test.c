@@ -73,8 +73,6 @@ TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWit
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
 }
-    
-    
 
 TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWithNullPtrAndNonZeroSubscrTableLenThenRetValueEqualObserverOk)
 {
@@ -91,7 +89,6 @@ TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWit
 
 TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWithSubscrCallbackTablePtrAndSubscrTableLenEqual0ThenRetValueEqualObserverOk)
 {
-
     // Given
     subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     subscribe(subscription, mock_fun_2, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
@@ -101,15 +98,15 @@ TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWit
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
-// TEST(observer_notify, GivenSubscriptionTableEmptyWhenNotifyCalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverTableEmptyError)
-// {
-//     // Given
-
-//     // When
-
-//     // Then
-//     TEST_FAIL_MESSAGE("Added new test")
-// }
+TEST(observer_notify, GivenSubscriptionTableEmptyWhenNotifyCalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverTableEmptyError)
+{
+    // Given
+    clear_subscription_table();
+    // When
+    subscr_status_e ret_status = notify(subscription, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(OBSERVER_TABLE_EMPTY_ERROR, ret_status);
+}
 
 // TEST(observer_notify, )
 // {

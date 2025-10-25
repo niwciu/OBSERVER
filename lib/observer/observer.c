@@ -7,7 +7,7 @@
  * @details
  * This source file implements a deterministic, static memory Observer pattern.
  * All API functions validate input parameters and return clear error codes.
- * 
+ *
  * Features:
  *  - No dynamic memory allocation.
  *  - Deterministic table-based subscription management.
@@ -150,7 +150,6 @@ subscr_status_e subscribe_state_change(observer_cb_state_t *subscription_table, 
     return status;
 }
 
-
 subscr_status_e unsubscribe_state_change(observer_cb_state_t *subscription_table, observer_cb_state_t cb_2_register, uint8_t subscription_table_size)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
@@ -288,4 +287,3 @@ subscr_status_e notify_u8(observer_cb_u8_arg_t *subscription_table, uint8_t subs
 
     return status;
 }
-

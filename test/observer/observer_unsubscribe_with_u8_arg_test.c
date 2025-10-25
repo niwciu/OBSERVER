@@ -224,7 +224,6 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableFullOfSameFunWhenUnsubThenTable
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-
 /* SUBSCRIBE RET VALUE test cases to run */
 TEST(observer_unsubscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenUnsubscribeU8DummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackNotFoundError)
 {

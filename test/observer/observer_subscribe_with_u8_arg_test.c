@@ -82,7 +82,6 @@ TEST(observer_subscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenSubscribe3Fu
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 }
 
-
 TEST(observer_subscribe_with_u8_arg, GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled)
 {
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_u8_arg_t);

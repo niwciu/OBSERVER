@@ -263,7 +263,6 @@ TEST(observer_unsubscribe, GivenSubscribtionTableFullWithMock1FunAdressesWhenMoc
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subsribtion, subscription, memory_obj_byte_len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-
 /* SUBSCRIBE RET VALUE test cases to run */
 TEST(observer_unsubscribe, GivenSubscriptionTableEmptyWhenUnsubscribeMockFun1FromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackNotFoundError)
 {
