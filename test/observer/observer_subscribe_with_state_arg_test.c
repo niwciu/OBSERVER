@@ -16,12 +16,12 @@ static void mock_fun_with_state_arg(event_state_e state)
     (void)state;
     mock_fun_with_arg_counter[0]++;
 }
-static void mock_fun_with_arg_2(event_state_e state)
+static void mock_fun_with_state_arg_2(event_state_e state)
 {
     (void)state;
     mock_fun_with_arg_counter[1]++;
 }
-static void mock_fun_with_arg_3(event_state_e state)
+static void mock_fun_with_state_arg_3(event_state_e state)
 {
     (void)state;
     mock_fun_with_arg_counter[2]++;
@@ -59,10 +59,10 @@ TEST(observer_subscribe_with_state_arg, GivenSubscriptionTableEmptyWhenSubscribe
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_state_t);
     static observer_cb_state_t expected_subscription[SUBSCRIPTION_CALLBACKS_TABLE_SIZE] = {NULL};
     expected_subscription[0] = mock_fun_with_state_arg;
-    expected_subscription[1] = mock_fun_with_arg_2;
+    expected_subscription[1] = mock_fun_with_state_arg_2;
 
     subscribe_state_change(subscription, mock_fun_with_state_arg, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_state_change(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_state_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 }
@@ -72,12 +72,12 @@ TEST(observer_subscribe_with_state_arg, GivenSubscriptionTableEmptyWhenSubscribe
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_state_t);
     static observer_cb_state_t expected_subscription[SUBSCRIPTION_CALLBACKS_TABLE_SIZE] = {NULL};
     expected_subscription[0] = mock_fun_with_state_arg;
-    expected_subscription[1] = mock_fun_with_arg_2;
-    expected_subscription[2] = mock_fun_with_arg_3;
+    expected_subscription[1] = mock_fun_with_state_arg_2;
+    expected_subscription[2] = mock_fun_with_state_arg_3;
 
     subscribe_state_change(subscription, mock_fun_with_state_arg, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_state_change(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_state_change(subscription, mock_fun_with_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_state_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_state_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 }
