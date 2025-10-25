@@ -75,6 +75,53 @@ TEST(observer_notify_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedWhenNotif
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_with_arg_counter, MOCK_COUNTER_QTY);
 }
 
+/* SUBSCRIBE RET VALUE test cases to run */
+TEST(observer_notify_with_u8_arg, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyWithU8CalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverOk)
+{
+
+    // Given
+    subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = notify_u8(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
+    // Then
+    TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
+}
+
+TEST(observer_notify_with_u8_arg, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyWithU8CalledWithNullPtrAndNonZeroSubscrTableLenThenRetValueEqualObserverOk)
+{
+
+    // Given
+    subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = notify_u8(NULL, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,EVENT_STATE_ENTER);
+    // Then
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
+}
+
+TEST(observer_notify_with_u8_arg, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyWithU8CalledWithSubscrCallbackTablePtrAndSubscrTableLenEqual0ThenRetValueEqualObserverOk)
+{
+    // Given
+    subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = notify_u8(subscription, 0, EVENT_STATE_ENTER);
+    // Then
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
+}
+TEST(observer_notify_with_u8_arg, GivenSubscriptionTableEmptyWhenNotifyWithU8CalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverTableEmptyError)
+{
+    // Given
+    clear_subscription_table();
+    // When
+    subscr_status_e ret_status = notify_u8(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,EVENT_STATE_EXIT);
+    // Then
+    TEST_ASSERT_EQUAL(OBSERVER_TABLE_EMPTY_ERROR, ret_status);
+}
 static void clear_subscription_table(void)
 {
     for (uint8_t i = 0; i < SUBSCRIPTION_CALLBACKS_TABLE_SIZE; i++)
