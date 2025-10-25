@@ -263,25 +263,47 @@ TEST(observer_unsubscribe, GivenSubscribtionTableFullWithMock1FunAdressesWhenMoc
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subsribtion, subscription, memory_obj_byte_len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-// TEST(observer_unsubscribe, )
-// {
-//     // Given
 
-//     // When
+/* SUBSCRIBE RET VALUE test cases to run */
+TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1FromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
+{
+    // Given
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, ret_status);
+}
 
-//     // Then
-//     TEST_FAIL_MESSAGE("Added new test")
-// }
+TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1FromSubscriptionTableWitZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+{
+    // Given
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe(subscription, mock_fun_1, 0);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+}
 
-// TEST(observer_unsubscribe, )
-// {
-//     // Given
+TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeNullPtrFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+{
+    // Given
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe(subscription, NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+}
 
-//     // When
-
-//     // Then
-//     TEST_FAIL_MESSAGE("Added new test")
-// }
+TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1FromNullPtrSubscrTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+{
+    // Given
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = unsubscribe(NULL, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+}
 
 // TEST(observer_unsubscribe, )
 // {
