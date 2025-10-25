@@ -1,5 +1,5 @@
 /**
- * @file main_state_example.c
+ * @file main.c
  * @author niwciu (niwciu@gmail.com)
  * @brief Entry point for mock state machine demonstration.
  * @version 1.0.0

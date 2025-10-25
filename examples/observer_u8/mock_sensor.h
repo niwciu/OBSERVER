@@ -1,5 +1,6 @@
 /**
  * @file mock_sensor.h
+ * @author niwciu (niwciu@gmail.com)
  * @brief Mock sensor module generating uint8_t data notifications.
  * @version 1.0.0
  * @date 2025-10-25
@@ -8,6 +9,10 @@
  * This module periodically generates simulated sensor readings
  * and notifies all subscribed observers with a uint8_t argument.
  * Demonstrates use of the observer_u8 API.
+ *
+ * @note Deterministic execution, static memory only.
+ *
+ * @copyright Copyright (c) 2025
  */
 
 #ifndef MOCK_SENSOR_H
