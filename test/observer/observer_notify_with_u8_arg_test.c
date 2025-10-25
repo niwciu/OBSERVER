@@ -55,7 +55,7 @@ TEST(observer_notify_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenN
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_with_arg_counter, MOCK_COUNTER_QTY);
 }
 
-TEST(observer_notify_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified)
+TEST(observer_notify_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedWhenNotifyWithArgCalledThenOnlyRemainingAreNotified)
 {
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {2, 1, 2};
 

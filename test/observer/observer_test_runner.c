@@ -123,14 +123,14 @@ TEST_GROUP_RUNNER(observer_notify)
     RUN_TEST_CASE(observer_notify, GivenSubscriptionTableEmptyWhenNotifyCalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverTableEmptyError);
 }
 
-TEST_GROUP_RUNNER(observer_notify_with_arg)
+TEST_GROUP_RUNNER(observer_notify_with_state_arg)
 {
-    RUN_TEST_CASE(observer_notify_with_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
-    RUN_TEST_CASE(observer_notify_with_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified);
+    RUN_TEST_CASE(observer_notify_with_state_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
+    RUN_TEST_CASE(observer_notify_with_state_arg, GivenAll3SubscribedAndOneUnsubscribedWhenNotifyWithStateArgCalledThenOnlyRemainingAreNotified);
 }
 
 TEST_GROUP_RUNNER(observer_notify_with_u8_arg)
 {
     RUN_TEST_CASE(observer_notify_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
-    RUN_TEST_CASE(observer_notify_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified);
+    RUN_TEST_CASE(observer_notify_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedWhenNotifyWithArgCalledThenOnlyRemainingAreNotified);
 }

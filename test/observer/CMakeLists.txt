@@ -40,7 +40,7 @@ set(TEST_SRCS
     observer_subscribe_test.c
 	observer_unsubscribe_test.c
 	observer_notify_test.c
-	observer_notify_with_arg_test.c
+	observer_notify_with_state_arg_test.c
 	observer_notify_with_u8_arg_test.c
 	observer_subscribe_with_state_arg_test.c
 	observer_subscribe_with_u8_arg_test.c
