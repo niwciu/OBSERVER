@@ -27,19 +27,19 @@ static void mock_fun_with_u8_arg_3(uint8_t u8_arg)
     mock_fun_with_arg_counter[2]++;
 }
 
-TEST_GROUP(observer_notice_with_u8_arg);
+TEST_GROUP(observer_notify_with_u8_arg);
 
-TEST_SETUP(observer_notice_with_u8_arg)
+TEST_SETUP(observer_notify_with_u8_arg)
 {
     clear_subscription_table();
     mock_reset_mock_fun_with_arg_counters();
 }
 
-TEST_TEAR_DOWN(observer_notice_with_u8_arg)
+TEST_TEAR_DOWN(observer_notify_with_u8_arg)
 {
 }
 
-TEST(observer_notice_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased)
+TEST(observer_notify_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased)
 {
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {1, 1, 1};
 
@@ -55,7 +55,7 @@ TEST(observer_notice_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenN
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_with_arg_counter, MOCK_COUNTER_QTY);
 }
 
-TEST(observer_notice_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified)
+TEST(observer_notify_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified)
 {
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {2, 1, 2};
 

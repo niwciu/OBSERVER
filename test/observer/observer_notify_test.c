@@ -9,20 +9,20 @@ static observer_cb_t subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE];
 
 static void clear_subscription_table(void);
 
-TEST_GROUP(observer_notice);
+TEST_GROUP(observer_notify);
 
-TEST_SETUP(observer_notice)
+TEST_SETUP(observer_notify)
 {
     /* Init before every test */
     clear_subscription_table();
 }
 
-TEST_TEAR_DOWN(observer_notice)
+TEST_TEAR_DOWN(observer_notify)
 {
     /* Cleanup after every test */
 }
 
-TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThenSubscribedMockFunCountersEqual1)
+TEST(observer_notify, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledThenSubscribedMockFunCountersEqual1)
 {
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {0};
     expected_mock_counter[0] = 1;
@@ -40,7 +40,7 @@ TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3Subs
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_counter, MOCK_COUNTER_QTY);
 }
 
-TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedAndNoticeCalledAndMock2FunUnsubscribedWhenNoticeCalledThenSubscribedMockFun1AndMockFun3CountersEqual2AndMockFun2CounterEqual1)
+TEST(observer_notify, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedAndNotifyCalledAndMock2FunUnsubscribedWhenNotifyCalledThenSubscribedMockFun1AndMockFun3CountersEqual2AndMockFun2CounterEqual1)
 {
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {0};
     expected_mock_counter[0] = 2;
@@ -60,7 +60,8 @@ TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3Subs
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_counter, MOCK_COUNTER_QTY);
 }
 
-TEST(observer_notice, GivenMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThenRetValueEqualObserverOk)
+/* SUBSCRIBE RET VALUE test cases to run */
+TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledThenRetValueEqualObserverOk)
 {
 
     // Given
@@ -73,7 +74,7 @@ TEST(observer_notice, GivenMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThe
     TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
 }
 
-// TEST(observer_notice, )
+// TEST(observer_notify, )
 // {
 //     // Given
 
@@ -83,7 +84,7 @@ TEST(observer_notice, GivenMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThe
 //     TEST_FAIL_MESSAGE("Added new test")
 // }
 
-// TEST(observer_notice, )
+// TEST(observer_notify, )
 // {
 //     // Given
 
