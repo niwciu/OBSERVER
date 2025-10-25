@@ -33,36 +33,43 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 
 ```
 /observer_lib/
-│
-├── .github/
-│   └── workflows/
-│       ├── CI_Pipeline.yml             # Continuous integration workflow
-│       └── Deploy.yml                  # GitHub Pages deployment
-├── doc/
 ├── examples/
-│   ├── example_basic/                  # Simple callback example
-│   ├── example_state/                  # State-change observer example
-│   └── example_u8_arg/                 # Observer with uint8_t argument
-│
+│   ├── basic_observer/                 # Simple callback example
+│   ├── state_observer/                 # State-change observer example
+│   └── observeer_u8/                   # Observer with uint8_t notify argument example
 ├── hw/
 ├── lib/
 │   └── observer/                
 │        ├── observer.c                 # Core implementation (MISRA-C compliant)
 │        ├── observer.h                 # Public API header
 │        └── observer_public_types.h    # Public enums and callback type definitions
-│
 ├── test/
 │   ├── observer/                       # library Unit tests (Unity)
 │   ├── unity/                          # Unit test framework
 │   └── reports/                        # Coverage and complexity reports
-│
 └── LICENSE                             # Library License
 └── README.md                           # Library documentation
 ```
 
+> Each example is self-contained with static memory and deterministic execution.
+
+---
+
+## 📚 Examples Overview
+
+| Example         | Description                                                            | Folder                                     |
+| --------------- | ---------------------------------------------------------------------- | ------------------------------------------ |
+| Basic Observer  | Simple callback example using pushbutton, LED and LCD mocks            | [example_basic](examples/example_basic/)   |
+| State Observer  | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [example_state](examples/example_state/)   |
+| Sensor Observer | Observer with `uint8_t` argument demonstrating periodic sensor updates | [example_u8_arg](examples/example_u8_arg/) |
+
+> Each folder contains a complete `src/` with all C/H files and a `README.md` describing usage, expected output, and safety notes.
+
 ---
 
 ## ⚙️ API Reference
+
+Observer pattern provides deterministic subscription/notification functions:
 
 ### `subscribe`
 
@@ -112,112 +119,11 @@ Each API has equivalents for callbacks with arguments:
 * `subscribe_enter_exit(...)` / `unsubscribe_enter_exit(...)` / `notify_enter_exit(...)` — for `event_state_e` arguments.
 * `subscribe_u8(...)` / `unsubscribe_u8(...)` / `notify_u8(...)` — for `uint8_t` arguments.
 
----
-
-## 🧠 Example 1: Basic Observer
-
-```c
-#include "observer.h"
-#include <stdio.h>
-
-#define MAX_OBSERVERS 4U
-
-static observer_cb_t system_event_list[MAX_OBSERVERS] = { NULL };
-
-static void on_system_ready(void)
-{
-    printf("System is ready!\n");
-}
-
-int main(void)
-{
-    (void)subscribe(system_event_list, on_system_ready, MAX_OBSERVERS);
-    notify(system_event_list, MAX_OBSERVERS);
-    return 0;
-}
-```
-
-**Output:**
-
-```
-System is ready!
-```
+> All APIs are **MISRA-C compliant**, deterministic, and use **static memory tables only**.
 
 ---
 
-## 🧩 Example 2: Observer with `event_state_e` Argument
-
-```c
-#include "observer.h"
-#include <stdio.h>
-
-#define MAX_OBSERVERS 4U
-
-static observer_cb_arg_t state_observers[MAX_OBSERVERS] = { NULL };
-
-static void on_state_change(event_state_e state)
-{
-    if (state == EVENT_STATE_ENTER)
-    {
-        printf("Entering state\n");
-    }
-    else
-    {
-        printf("Exiting state\n");
-    }
-}
-
-int main(void)
-{
-    (void)subscribe_enter_exit(state_observers, on_state_change, MAX_OBSERVERS);
-    notify_enter_exit(state_observers, MAX_OBSERVERS, EVENT_STATE_ENTER);
-    notify_enter_exit(state_observers, MAX_OBSERVERS, EVENT_STATE_EXIT);
-    return 0;
-}
-```
-
-**Output:**
-
-```
-Entering state
-Exiting state
-```
-
----
-
-## 🔢 Example 3: Observer with `uint8_t` Argument
-
-```c
-#include "observer.h"
-#include <stdio.h>
-
-#define MAX_OBSERVERS 4U
-static observer_cb_u8_arg_t sensor_observers[MAX_OBSERVERS] = { NULL };
-
-static void on_sensor_update(uint8_t value)
-{
-    printf("Sensor value: %u\n", value);
-}
-
-int main(void)
-{
-    (void)subscribe_u8(sensor_observers, on_sensor_update, MAX_OBSERVERS);
-    notify_u8(sensor_observers, MAX_OBSERVERS, 42U);
-    notify_u8(sensor_observers, MAX_OBSERVERS, 99U);
-    return 0;
-}
-```
-
-**Output:**
-
-```
-Sensor value: 42
-Sensor value: 99
-```
-
----
-
-## 🧪 Running Unit Tests
+## ✅ Running Unit Tests
 
 ```bash
 cd test/observer
@@ -225,12 +131,56 @@ cmake -S ./ -B out -G "Unix Makefiles"
 cd out
 make run
 ```
+---
 
-Generates:
+## 🛠️ Run Cppcheck
 
-* `gcovr.html` → Code coverage report
-* `code_complexity_report.html` → Cyclomatic complexity
+```bash
+cd test/observer
+cmake -S ./ -B out -G "Unix Makefiles"
+cd out
+make cppcheck
+```
+---
 
+## 📈 Run Cyclomatic Complexity (CCM/Lizard)
+
+```bash
+cd test/observer
+cmake -S ./ -B out -G "Unix Makefiles"
+cd out
+make ccm
+```
+---
+
+## 📝 Generate CCM HTML Report
+
+```bash
+cd test/observer
+cmake -S ./ -B out -G "Unix Makefiles"
+cd out
+make ccmr
+```
+---
+
+## 📊 Run Code Coverage (gcovr)
+
+```bash
+cd test/observer
+cmake -S ./ -B out -G "Unix Makefiles"
+cd out
+make ccc
+```
+---
+
+## 📝 Generate Code Coverage HTML
+
+```bash
+cd test/observer
+cmake -S ./ -B out -G "Unix Makefiles"
+cd out
+make ccmr
+```
 ---
 
 ## 🧰 Safety / Compliance Notes
@@ -275,7 +225,7 @@ static observer_cb_t my_table[4U] = { NULL };
 
 ## 📜 License
 
-Licensed under the MIT License — see `LICENSE` file for details.
+MIT License — see `LICENSE` file.
 
 © 2025 [niwciu](mailto:niwciu@gmail.com)
 
