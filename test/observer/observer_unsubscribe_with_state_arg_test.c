@@ -225,7 +225,17 @@ TEST(observer_unsubscribe_with_state_arg, GivenTableFullOfSameFunWhenUnsubThenTa
 }
 
 /* SUBSCRIBE RET VALUE test cases to run */
-TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeDummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
+TEST(observer_unsubscribe_with_state_arg, GivenSubscriptionTableEmptyWhenUnsubscribeStateChangeDummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackNotFoundError)
+{
+    // Given
+    clear_subscription_table();
+    // When
+    subscr_status_e ret_status = unsubscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_NOT_FOUND_ERROR, ret_status);
+}
+
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeDummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToObserverOk)
 {
     // Given
     subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);

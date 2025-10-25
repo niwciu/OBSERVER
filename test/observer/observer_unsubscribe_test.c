@@ -265,7 +265,16 @@ TEST(observer_unsubscribe, GivenSubscribtionTableFullWithMock1FunAdressesWhenMoc
 
 
 /* SUBSCRIBE RET VALUE test cases to run */
-TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1FromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
+TEST(observer_unsubscribe, GivenSubscriptionTableEmptyWhenUnsubscribeMockFun1FromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackNotFoundError)
+{
+    // Given
+    clear_subscription_table();
+    // When
+    subscr_status_e ret_status = unsubscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_NOT_FOUND_ERROR, ret_status);
+}
+TEST(observer_unsubscribe, GivenMocFun1FuncionSubscribedWhenUnsubscribeMockFun1FromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToObserverOk)
 {
     // Given
     subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);

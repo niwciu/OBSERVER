@@ -226,6 +226,16 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableFullOfSameFunWhenUnsubThenTable
 
 
 /* SUBSCRIBE RET VALUE test cases to run */
+TEST(observer_unsubscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenUnsubscribeU8DummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackNotFoundError)
+{
+    // Given
+    clear_subscription_table();
+    // When
+    subscr_status_e ret_status = unsubscribe_u8(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_NOT_FOUND_ERROR, ret_status);
+}
+
 TEST(observer_unsubscribe_with_u8_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeU8DummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
 {
     // Given
