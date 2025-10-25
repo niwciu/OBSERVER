@@ -1,7 +1,8 @@
 /**
  * @file mock_pushbutton.c
+ * @author niwciu (niwciu@gmail.com)
  * @brief Implementation of mock pushbutton "C" event generator.
- * @version 1.0.1
+ * @version 1.0.0
  * @date 2025-10-25
  *
  * @details
@@ -12,10 +13,12 @@
  * @note POSIX system calls (select, termios) are used solely for simulation.
  *       These calls are not part of MISRA-C safe subset but are acceptable
  *       for host-side testing and demonstration.
+ * 
+ * @copyright Copyright (c) 2025
+ */
  */
 
 #include "mock_pushbutton.h"
-
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
@@ -25,7 +28,6 @@
 #define SUBSCR_TABLE_SIZE (4U)
 
 static observer_cb_t key_c_push_subscr_table[SUBSCR_TABLE_SIZE];
-
 static struct termios oldt;
 static struct termios newt;
 
@@ -35,12 +37,9 @@ static int kbhit(void); /* Non-MISRA: POSIX API for simulation */
 static int getch(void); /* Non-MISRA: POSIX API for simulation */
 
 /* ===================== Public API Implementation ========================= */
-
 void init_mock_pushbutton(void)
 {
     clear_subscr_tables();
-
-    /* Configure terminal in RAW mode — disables canonical input and echo */
     (void)tcgetattr(STDIN_FILENO, &oldt);
     newt = oldt;
     newt.c_lflag &= ~(ICANON | ECHO);
@@ -49,7 +48,6 @@ void init_mock_pushbutton(void)
 
 void deinit_mock_pushbutton(void)
 {
-    /* Restore terminal configuration */
     (void)tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 }
 
@@ -60,7 +58,6 @@ void subscribe_C_push_event(observer_cb_t callback)
 
 void update_mock_pushbutton(void)
 {
-    /* Check keyboard input without blocking */
     if (kbhit() != 0)
     {
         const int c = getch();
@@ -68,19 +65,10 @@ void update_mock_pushbutton(void)
         {
             notify(key_c_push_subscr_table, SUBSCR_TABLE_SIZE);
         }
-        else
-        {
-            /* No action for other keys */
-        }
-    }
-    else
-    {
-        /* No input available */
     }
 }
 
 /* ===================== Static Helper Functions ========================== */
-
 static void clear_subscr_tables(void)
 {
     uint8_t i;

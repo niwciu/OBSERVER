@@ -1,5 +1,6 @@
 /**
  * @file mock_LCD.h
+ * @author niwciu (niwciu@gmail.com)
  * @brief Mock LCD observer module for displaying pushbutton event information.
  * @version 1.0.0
  * @date 2025-10-25
@@ -7,12 +8,22 @@
  * @details
  * This module prints informational text whenever the "C" key is pressed,
  * showing how multiple observers can react independently to the same event.
+ * 
+ * @copyright Copyright (c) 2025
  */
 
 #ifndef MOCK_LCD_H
 #define MOCK_LCD_H
 
+/**
+ * @brief Initialize the mock LCD module.
+ * No hardware initialization is performed in this mock module.
+ */
 void init_mock_LCD(void);
+
+/**
+ * @brief Register the LCD observer callback for the "C key pressed" event.
+ */
 void set_mock_LCD_subscriptions(void);
 
 #endif /* MOCK_LCD_H */

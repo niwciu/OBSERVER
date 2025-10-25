@@ -1,6 +1,6 @@
 /**
  * @file mock_pushbutton.h
- * @author 
+ * @author niwciu (niwciu@gmail.com)
  * @brief Mock module simulating a hardware pushbutton ("C") in terminal environment.
  * @version 1.0.1
  * @date 2025-10-25
@@ -15,9 +15,9 @@
  *
  * @note Terminal mode configuration uses POSIX system calls
  *       (non-MISRA compliant, justified for simulation only).
- *
- * @copyright
- * Copyright (c) 2025
+ * 
+ * @copyright Copyright (c) 2025
+ */
  */
 
 #ifndef MOCK_PUSHBUTTON_H

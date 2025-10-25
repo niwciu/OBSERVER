@@ -1,5 +1,6 @@
 /**
  * @file main.c
+ * @author niwciu (niwciu@gmail.com)
  * @brief Entry point for mock observer demonstration.
  * @version 1.0.0
  * @date 2025-10-25
@@ -11,6 +12,8 @@
  *
  * The program operates deterministically with static memory only.
  * Exiting restores the terminal configuration.
+ * 
+ * @copyright Copyright (c) 2025
  */
 
 #include "mock_LCD.h"
@@ -19,12 +22,27 @@
 #include <stdio.h>
 
 /* ===================== Static Function Declarations ===================== */
+/**
+ * @brief Initialize all mock modules.
+ */
 static void init_mock_modules(void);
+
+/**
+ * @brief Register all observers to the pushbutton event.
+ */
 static void set_all_subscriptions(void);
+
+/**
+ * @brief Print information about example usage.
+ */
 static void print_example_info(void);
 
 /* ===================== Main Entry Point ================================= */
-
+/**
+ * @brief Program entry point.
+ * Initializes modules, sets up subscriptions and runs the main loop.
+ * @return Returns 0 on normal exit.
+ */
 int main(void)
 {
     init_mock_modules();
@@ -65,7 +83,6 @@ static void print_example_info(void)
     (void)printf(" Observers (LCD and LED) react independently.\r\n\r\n");
     (void)printf(" Demonstrates deterministic, MISRA-compliant observer pattern.\r\n\r\n");
     (void)printf("=================================================================\r\n");
-    (void)printf(" To check how exaple works press c key\r\n");
+    (void)printf(" To check how example works press 'c' key\r\n");
     (void)printf(" To stop, press Ctrl + Z\r\n\r\n");
-
 }
