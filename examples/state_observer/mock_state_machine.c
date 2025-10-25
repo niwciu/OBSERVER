@@ -55,5 +55,5 @@ void update_mock_state_machine(void)
         current_state = EVENT_STATE_EXIT;
     }
 
-    notify_enter_exit(state_subscriptions, STATE_TABLE_SIZE, current_state);
+    notify_state_change(state_subscriptions, STATE_TABLE_SIZE, current_state);
 }

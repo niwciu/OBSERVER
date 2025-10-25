@@ -49,7 +49,7 @@ TEST(observer_notify_with_state_arg, GivenMockCountersResetedAndAll3SubscribedWh
     subscribe_state_change(subscription, mock_fun_with_state_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     // When
-    notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
+    notify_state_change(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
 
     // Then
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_with_arg_counter, MOCK_COUNTER_QTY);
@@ -64,12 +64,12 @@ TEST(observer_notify_with_state_arg, GivenAll3SubscribedAndOneUnsubscribedWhenNo
     subscribe_state_change(subscription, mock_fun_with_state_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     subscribe_state_change(subscription, mock_fun_with_state_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
-    notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
+    notify_state_change(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
 
     unsubscribe_state_change(subscription, mock_fun_with_state_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     // When
-    notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_EXIT);
+    notify_state_change(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_EXIT);
 
     // Then
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_with_arg_counter, MOCK_COUNTER_QTY);
@@ -84,7 +84,7 @@ TEST(observer_notify_with_state_arg, GivenMockFun1MockFun2MockFun3SubscribedWhen
     subscribe_state_change(subscription, mock_fun_with_state_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     subscribe_state_change(subscription, mock_fun_with_state_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     // When
-    subscr_status_e ret_status = notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
+    subscr_status_e ret_status = notify_state_change(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
 }
@@ -97,7 +97,7 @@ TEST(observer_notify_with_state_arg, GivenMockFun1MockFun2MockFun3SubscribedWhen
     subscribe_state_change(subscription, mock_fun_with_state_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     subscribe_state_change(subscription, mock_fun_with_state_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     // When
-    subscr_status_e ret_status = notify_enter_exit(NULL, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,EVENT_STATE_ENTER);
+    subscr_status_e ret_status = notify_state_change(NULL, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
@@ -109,7 +109,7 @@ TEST(observer_notify_with_state_arg, GivenMockFun1MockFun2MockFun3SubscribedWhen
     subscribe_state_change(subscription, mock_fun_with_state_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     subscribe_state_change(subscription, mock_fun_with_state_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     // When
-    subscr_status_e ret_status = notify_enter_exit(subscription, 0, EVENT_STATE_ENTER);
+    subscr_status_e ret_status = notify_state_change(subscription, 0, EVENT_STATE_ENTER);
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
@@ -118,7 +118,7 @@ TEST(observer_notify_with_state_arg, GivenSubscriptionTableEmptyWhenNotifyWithSt
     // Given
     clear_subscription_table();
     // When
-    subscr_status_e ret_status = notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,EVENT_STATE_EXIT);
+    subscr_status_e ret_status = notify_state_change(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_EXIT);
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_TABLE_EMPTY_ERROR, ret_status);
 }

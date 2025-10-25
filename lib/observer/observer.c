@@ -65,19 +65,16 @@ subscr_status_e subscribe(observer_cb_t *subscription_table, observer_cb_t cb_2_
 subscr_status_e unsubscribe(observer_cb_t *subscription_table, observer_cb_t cb_2_register, uint8_t subscription_table_size)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
-    uint8_t i, j;
-    uint8_t found = 0u;
 
     if ((subscription_table != NULL) && (cb_2_register != NULL) && (subscription_table_size != 0u))
     {
         status = OBSERVER_TABLE_EMPTY_ERROR;
 
-        for (i = 0u; i < subscription_table_size; ++i)
+        for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
             if (subscription_table[i] == cb_2_register)
             {
-                found = 1u;
-                for (j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
+                for (uint8_t j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
                 {
                     subscription_table[j] = subscription_table[j + 1u];
                 }
@@ -153,19 +150,16 @@ subscr_status_e subscribe_state_change(observer_cb_state_t *subscription_table, 
 subscr_status_e unsubscribe_state_change(observer_cb_state_t *subscription_table, observer_cb_state_t cb_2_register, uint8_t subscription_table_size)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
-    uint8_t i, j;
-    uint8_t found = 0u;
 
     if ((subscription_table != NULL) && (cb_2_register != NULL) && (subscription_table_size != 0u))
     {
         status = OBSERVER_TABLE_EMPTY_ERROR;
 
-        for (i = 0u; i < subscription_table_size; ++i)
+        for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
             if (subscription_table[i] == cb_2_register)
             {
-                found = 1u;
-                for (j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
+                for (uint8_t j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
                 {
                     subscription_table[j] = subscription_table[j + 1u];
                 }
@@ -179,7 +173,7 @@ subscr_status_e unsubscribe_state_change(observer_cb_state_t *subscription_table
     return status;
 }
 
-subscr_status_e notify_enter_exit(observer_cb_state_t *subscription_table, uint8_t subscription_table_size, event_state_e state)
+subscr_status_e notify_state_change(observer_cb_state_t *subscription_table, uint8_t subscription_table_size, event_state_e state)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
 
@@ -241,19 +235,16 @@ subscr_status_e subscribe_u8(observer_cb_u8_arg_t *subscription_table, observer_
 subscr_status_e unsubscribe_u8(observer_cb_u8_arg_t *subscription_table, observer_cb_u8_arg_t cb_2_register, uint8_t subscription_table_size)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
-    uint8_t i, j;
-    uint8_t found = 0u;
 
     if ((subscription_table != NULL) && (cb_2_register != NULL) && (subscription_table_size != 0u))
     {
         status = OBSERVER_TABLE_EMPTY_ERROR;
 
-        for (i = 0u; i < subscription_table_size; ++i)
+        for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
             if (subscription_table[i] == cb_2_register)
             {
-                found = 1u;
-                for (j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
+                for (uint8_t j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
                 {
                     subscription_table[j] = subscription_table[j + 1u];
                 }

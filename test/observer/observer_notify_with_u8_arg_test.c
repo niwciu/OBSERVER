@@ -97,7 +97,7 @@ TEST(observer_notify_with_u8_arg, GivenMockFun1MockFun2MockFun3SubscribedWhenNot
     subscribe_u8(subscription, mock_fun_with_u8_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     subscribe_u8(subscription, mock_fun_with_u8_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
     // When
-    subscr_status_e ret_status = notify_u8(NULL, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,EVENT_STATE_ENTER);
+    subscr_status_e ret_status = notify_u8(NULL, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
@@ -118,7 +118,7 @@ TEST(observer_notify_with_u8_arg, GivenSubscriptionTableEmptyWhenNotifyWithU8Cal
     // Given
     clear_subscription_table();
     // When
-    subscr_status_e ret_status = notify_u8(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE,EVENT_STATE_EXIT);
+    subscr_status_e ret_status = notify_u8(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_EXIT);
     // Then
     TEST_ASSERT_EQUAL(OBSERVER_TABLE_EMPTY_ERROR, ret_status);
 }

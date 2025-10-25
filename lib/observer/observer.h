@@ -158,7 +158,7 @@ extern "C"
      * @post All registered callbacks called with `state`.
      * @safety Not reentrant; caller must ensure synchronization.
      */
-    subscr_status_e notify_enter_exit(observer_cb_state_t *subscription_table, uint8_t subscription_table_size, event_state_e state);
+    subscr_status_e notify_state_change(observer_cb_state_t *subscription_table, uint8_t subscription_table_size, event_state_e state);
 
     /* =========================================================================
      *  Callbacks with uint8_t argument
