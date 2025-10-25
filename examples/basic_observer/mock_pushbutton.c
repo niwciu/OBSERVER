@@ -1,9 +1,17 @@
 /**
  * @file mock_pushbutton.c
- * @author niwciu
- * @brief symulacja przycisku "C" reagująca bez Entera
+ * @brief Implementation of mock pushbutton "C" event generator.
  * @version 1.0.1
  * @date 2025-10-25
+ *
+ * @details
+ * This module simulates a pushbutton input using terminal keyboard input.
+ * Each time the 'c' key is detected, the observer notification mechanism
+ * from observer_lib is invoked.
+ *
+ * @note POSIX system calls (select, termios) are used solely for simulation.
+ *       These calls are not part of MISRA-C safe subset but are acceptable
+ *       for host-side testing and demonstration.
  */
 
 #include "mock_pushbutton.h"
@@ -14,58 +22,79 @@
 #include <fcntl.h>
 #include <sys/select.h>
 
-#define SUBSCR_TABLE_SIZE 4
+#define SUBSCR_TABLE_SIZE (4U)
 
-observer_cb_t key_c_push_subscr_table[SUBSCR_TABLE_SIZE];
+static observer_cb_t key_c_push_subscr_table[SUBSCR_TABLE_SIZE];
 
-static struct termios oldt, newt;
+static struct termios oldt;
+static struct termios newt;
 
+/* ===================== Static Function Declarations ====================== */
 static void clear_subscr_tables(void);
-static int kbhit(void);
-static int getch(void);
+static int kbhit(void); /* Non-MISRA: POSIX API for simulation */
+static int getch(void); /* Non-MISRA: POSIX API for simulation */
+
+/* ===================== Public API Implementation ========================= */
 
 void init_mock_pushbutton(void)
 {
     clear_subscr_tables();
 
-    // 🔧 Ustaw terminal w tryb RAW (bez Entera)
-    tcgetattr(STDIN_FILENO, &oldt);
+    /* Configure terminal in RAW mode — disables canonical input and echo */
+    (void)tcgetattr(STDIN_FILENO, &oldt);
     newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO); // bez kanonicznego trybu i echo
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    newt.c_lflag &= ~(ICANON | ECHO);
+    (void)tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 }
 
 void deinit_mock_pushbutton(void)
 {
-    // 🔧 Przywróć normalny tryb terminala
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    /* Restore terminal configuration */
+    (void)tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 }
 
 void subscribe_C_push_event(observer_cb_t callback)
 {
-    subscribe(key_c_push_subscr_table, callback, SUBSCR_TABLE_SIZE);
+    (void)subscribe(key_c_push_subscr_table, callback, SUBSCR_TABLE_SIZE);
 }
 
 void update_mock_pushbutton(void)
 {
-    if (kbhit())
+    /* Check keyboard input without blocking */
+    if (kbhit() != 0)
     {
-        int c = getch();
+        const int c = getch();
         if (c == 'c')
         {
             notify(key_c_push_subscr_table, SUBSCR_TABLE_SIZE);
         }
+        else
+        {
+            /* No action for other keys */
+        }
+    }
+    else
+    {
+        /* No input available */
     }
 }
 
+/* ===================== Static Helper Functions ========================== */
+
 static void clear_subscr_tables(void)
 {
-    for (int i = 0; i < SUBSCR_TABLE_SIZE; i++)
+    uint8_t i;
+    for (i = 0U; i < SUBSCR_TABLE_SIZE; ++i)
     {
         key_c_push_subscr_table[i] = NULL;
     }
 }
 
+/**
+ * @brief Check if a key was pressed (non-blocking).
+ * @return Non-zero if key available, zero otherwise.
+ * @note Non-MISRA: uses select() from POSIX for simulation.
+ */
 static int kbhit(void)
 {
     struct timeval tv = {0L, 0L};
@@ -75,7 +104,11 @@ static int kbhit(void)
     return select(STDIN_FILENO + 1, &fds, NULL, NULL, &tv);
 }
 
+/**
+ * @brief Read character from stdin without waiting for newline.
+ * @return Character code read from stdin.
+ */
 static int getch(void)
 {
-    return getchar(); // nie trzeba już modyfikować terminala w każdej iteracji
+    return getchar();
 }
