@@ -4,8 +4,8 @@
 
 // #include "tested_module.h"
 
-#define SYBSCRIPTION_CALBACKS_TABLE_SIZE 10
-static observer_cb_t subscribtion[SYBSCRIPTION_CALBACKS_TABLE_SIZE];
+#define SUBSCRIPTION_CALBACKS_TABLE_SIZE 10
+static observer_cb_t subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE];
 
 static void clear_subscription_table(void);
 
@@ -31,11 +31,11 @@ TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3Subs
 
     // Given
     mock_reset_mock_fun_counters();
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_2, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_3, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_2, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_3, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // When
-    notify(subscribtion, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    notify(subscription, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_counter, MOCK_COUNTER_QTY);
 }
@@ -49,13 +49,13 @@ TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3Subs
 
     // Given
     mock_reset_mock_fun_counters();
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_2, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_3, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    notify(subscribtion, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    unsubscribe(subscribtion, mock_fun_2, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_2, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_3, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    notify(subscription, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    unsubscribe(subscription, mock_fun_2, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // When
-    notify(subscribtion, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    notify(subscription, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_counter, MOCK_COUNTER_QTY);
 }
@@ -92,8 +92,8 @@ TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3Subs
 
 static void clear_subscription_table(void)
 {
-    for (uint8_t i = 0; i < SYBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
+    for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
     {
-        subscribtion[i] = NULL;
+        subscription[i] = NULL;
     }
 }

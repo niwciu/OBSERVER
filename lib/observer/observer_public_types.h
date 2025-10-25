@@ -27,7 +27,8 @@ extern "C"
     {
         CALLBACK_SUBSCR_OK = 0u,
         CALLBACK_ERROR_INVALID_ARGUMENT = 1u,
-        CALLBACK_ERROR_TABLE_FULL = 2u
+        CALLBACK_ERROR_TABLE_FULL = 2u,
+        CALLBACK_ERROR_NOT_FOUND = 3u
     } subscr_status_e;
 
     /**
@@ -49,7 +50,7 @@ extern "C"
     /**
      * @brief Callback taking event_state_e argument.
      */
-    typedef void (*observer_cb_arg_t)(event_state_e state);
+    typedef void (*observer_cb_state_t)(event_state_e state);
 
     /**
      * @brief Callback taking uint8_t argument.

@@ -4,14 +4,14 @@
 #define SUBSCRIPTION_CALLBACKS_TABLE_SIZE 10
 #define MOCK_COUNTER_QTY 3
 
-static observer_cb_arg_t subscription[SUBSCRIPTION_CALLBACKS_TABLE_SIZE];
+static observer_cb_state_t subscription[SUBSCRIPTION_CALLBACKS_TABLE_SIZE];
 static uint8_t mock_fun_with_arg_counter[MOCK_COUNTER_QTY] = {0};
 
 static void clear_subscription_table(void);
 static void mock_reset_mock_fun_with_arg_counters(void);
 
 // Mockowane funkcje z argumentem (przyjmują `void*` i zwiększają odpowiedni licznik)
-static void mock_fun_with_arg_1(event_state_e state)
+static void mock_fun_with_state_arg(event_state_e state)
 {
     (void)state;
     mock_fun_with_arg_counter[0]++;
@@ -44,9 +44,9 @@ TEST(observer_notice_with_arg, GivenMockCountersResetedAndAll3SubscribedWhenNoti
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {1, 1, 1};
 
     // Given
-    subscribe_enter_exit(subscription, mock_fun_with_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_enter_exit(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_enter_exit(subscription, mock_fun_with_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_state_arg, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     // When
     notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
@@ -60,13 +60,13 @@ TEST(observer_notice_with_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRema
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {2, 1, 2};
 
     // Given
-    subscribe_enter_exit(subscription, mock_fun_with_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_enter_exit(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_enter_exit(subscription, mock_fun_with_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_state_arg, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_state_change(subscription, mock_fun_with_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
 
-    unsubscribe_enter_exit(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    unsubscribe_state_change(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     // When
     notify_enter_exit(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_EXIT);

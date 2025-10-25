@@ -5,29 +5,29 @@
 #define FUN_ADR_OFFSET 0x200U
 #define LAST_CB_TAB_ELEMENT (SUBSCRIPTION_CALBACKS_TABLE_SIZE - 1)
 
-static observer_cb_u8_arg_t subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE];
+static observer_cb_state_t subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE];
 
 static void clear_subscription_table(void);
-static void dummy_cb(uint8_t u8_arg)
+static void dummy_cb(event_state_e arg)
 {
-    (void)u8_arg;
+    (void)arg;
 }
 
-TEST_GROUP(observer_unsubscribe_with_u8_arg);
+TEST_GROUP(observer_unsubscribe_with_arg);
 
-TEST_SETUP(observer_unsubscribe_with_u8_arg)
+TEST_SETUP(observer_unsubscribe_with_arg)
 {
     clear_subscription_table();
 }
 
-TEST_TEAR_DOWN(observer_unsubscribe_with_u8_arg)
+TEST_TEAR_DOWN(observer_unsubscribe_with_arg)
 {
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty)
+TEST(observer_unsubscribe_with_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty)
 {
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static uint32_t len = sizeof(observer_cb_state_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
 
     subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     unsubscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
@@ -35,10 +35,10 @@ TEST(observer_unsubscribe_with_u8_arg, GivenMockFun1SubscribedWhenUnsubThenTable
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTableEqualExpected)
 {
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static uint32_t len = sizeof(observer_cb_state_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
 
     expected[0] = (&dummy_cb + (FUN_ADR_OFFSET * 0));
     expected[1] = (&dummy_cb + (FUN_ADR_OFFSET * 1));
@@ -55,10 +55,10 @@ TEST(observer_unsubscribe_with_u8_arg, GivenFun1To5SubscribedWhenUnsubFun3ThenTa
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTableEqualExpected)
 {
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static uint32_t len = sizeof(observer_cb_state_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
 
     for (int i = 0; i < 4; i++)
         expected[i] = (&dummy_cb + (FUN_ADR_OFFSET * i));
@@ -71,11 +71,11 @@ TEST(observer_unsubscribe_with_u8_arg, GivenFun1To5SubscribedWhenUnsubFun5ThenTa
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubOneBeforeLastThenTableEqualExpected)
 {
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
-    static observer_cb_u8_arg_t unsubscr_fun;
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_state_t unsubscr_fun;
+    static uint32_t len = sizeof(observer_cb_state_t);
 
     for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
     {
@@ -92,13 +92,13 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsubOneBeforeLastThenT
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsub5thElementThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsub5thElementThenTableEqualExpected)
 {
 #define UNSUBSCR_CB_TABLE_ELEMENT 4U
 
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
-    static observer_cb_u8_arg_t unsubscr_fun;
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_state_t unsubscr_fun;
+    static uint32_t len = sizeof(observer_cb_state_t);
     static uint8_t i;
 
     for (i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
@@ -119,11 +119,11 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsub5thElementThenTabl
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsubLastElementThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenTableFullWhenUnsubLastElementThenTableEqualExpected)
 {
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
-    static observer_cb_u8_arg_t unsubscr_fun;
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_state_t unsubscr_fun;
+    static uint32_t len = sizeof(observer_cb_state_t);
 
     for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
     {
@@ -139,13 +139,13 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableFullWhenUnsubLastElementThenTab
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubOneBeforeLastThenTableEqualExpected)
 {
 #define UNSUBSCR_FUNC_TAB_ELEMENT (LAST_CB_TAB_ELEMENT - 2)
 
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
-    static observer_cb_u8_arg_t unsubscr_fun;
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_state_t unsubscr_fun;
+    static uint32_t len = sizeof(observer_cb_state_t);
 
     for (uint8_t i = 0; i < LAST_CB_TAB_ELEMENT; i++)
     {
@@ -162,13 +162,13 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsubOneBeforeL
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsub5thFunctionThenTableEqualExpected)
 {
 #define UNSUBSCR_CB_TABLE_ELEMENT 4U
 
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
-    static observer_cb_u8_arg_t unsubscr_fun;
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_state_t unsubscr_fun;
+    static uint32_t len = sizeof(observer_cb_state_t);
     static uint8_t i;
 
     for (i = 0; i < LAST_CB_TAB_ELEMENT; i++)
@@ -189,11 +189,11 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsub5thFunctio
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected)
+TEST(observer_unsubscribe_with_arg, GivenTableWithLastNullWhenUnsubLastSubscribedThenTableEqualExpected)
 {
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
-    static observer_cb_u8_arg_t unsubscr_fun;
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_state_t unsubscr_fun;
+    static uint32_t len = sizeof(observer_cb_state_t);
 
     for (uint8_t i = 0; i < LAST_CB_TAB_ELEMENT; i++)
     {
@@ -209,10 +209,10 @@ TEST(observer_unsubscribe_with_u8_arg, GivenTableWithLastNullWhenUnsubLastSubscr
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, subscription, len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_unsubscribe_with_u8_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty)
+TEST(observer_unsubscribe_with_arg, GivenTableFullOfSameFunWhenUnsubThenTableIsEmpty)
 {
-    static observer_cb_u8_arg_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
-    static uint32_t len = sizeof(observer_cb_u8_arg_t);
+    static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static uint32_t len = sizeof(observer_cb_state_t);
 
     for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE - 1; i++)
     {

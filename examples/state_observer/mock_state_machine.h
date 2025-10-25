@@ -29,7 +29,7 @@ void init_mock_state_machine(void);
  *
  * @param callback Pointer to observer function taking event_state_e argument.
  */
-void subscribe_state_event(observer_cb_arg_t callback);
+void subscribe_state_event(observer_cb_state_t callback);
 
 /**
  * @brief Update the state machine, toggling state and notifying observers.

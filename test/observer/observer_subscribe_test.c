@@ -2,8 +2,8 @@
 #include "observer.h"
 #include "mock_fun.h"
 
-#define SYBSCRIPTION_CALBACKS_TABLE_SIZE 10
-static observer_cb_t subscribtion[SYBSCRIPTION_CALBACKS_TABLE_SIZE];
+#define SUBSCRIPTION_CALBACKS_TABLE_SIZE 10
+static observer_cb_t subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE];
 
 static void clear_subscription_table(void);
 
@@ -24,98 +24,98 @@ TEST_TEAR_DOWN(observer_subscribe)
 TEST(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty)
 {
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_t);
-    static observer_cb_t expexted_subscription[SYBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_t expexted_subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     expexted_subscription[0] = mock_fun_1;
     // Given
     // When
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscribtion, memory_obj_byte_len, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
 TEST(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1AndNextSubscribedMockFun2ToSubscriptionTableThenInElemnt0IsEqualMockFun1AdresElement1IsEqualMockFun2AdrAndRestElementsAreEmpty)
 {
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_t);
-    static observer_cb_t expexted_subscription[SYBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_t expexted_subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     expexted_subscription[0] = mock_fun_1;
     expexted_subscription[1] = mock_fun_2;
     // Given
     // When
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_2, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_2, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscribtion, memory_obj_byte_len, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
 TEST(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribe3functionsThenFirst3CllbackTableElementsAreEqualToFunctionAdresssesAccordingToRegistrationOrderAndRestAreEqualNull)
 {
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_t);
-    static observer_cb_t expexted_subscription[SYBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_t expexted_subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     expexted_subscription[0] = mock_fun_1;
     expexted_subscription[1] = mock_fun_2;
     expexted_subscription[2] = mock_fun_3;
     // Given
     // When
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_2, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_3, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_2, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_3, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscribtion, memory_obj_byte_len, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
 TEST(observer_subscribe, GivenSubscriptionTableFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnSubscriptionTableFullStatus)
 {
     // Given
-    for (uint8_t i = 0; i < SYBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
+    for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
     {
-        subscribtion[i] = mock_dirty_fun;
+        subscription[i] = mock_dirty_fun;
     }
     // When
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_ERROR_TABLE_FULL, subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE));
+    TEST_ASSERT_EQUAL(CALLBACK_ERROR_TABLE_FULL, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
     // Then
 }
 
 TEST(observer_subscribe, GivenSubscriptionTableNotFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnCallbackSubscribedOk)
 {
     // Given
-    for (uint8_t i = 0; i < SYBSCRIPTION_CALBACKS_TABLE_SIZE - 1; i++)
+    for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE - 1; i++)
     {
-        subscribtion[i] = mock_dirty_fun;
+        subscription[i] = mock_dirty_fun;
     }
     // When
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE));
+    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
 }
 
 TEST(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThreeTimesThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty)
 {
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_t);
-    static observer_cb_t expexted_subscription[SYBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
+    static observer_cb_t expexted_subscription[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
     expexted_subscription[0] = mock_fun_1;
     // Given
     // When
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
-    subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscribtion, memory_obj_byte_len, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
 static void clear_subscription_table(void)
 {
-    for (uint8_t i = 0; i < SYBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
+    for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
     {
-        subscribtion[i] = NULL;
+        subscription[i] = NULL;
     }
 }
 
-/* SUBSCRIPTION RET VALUE test cases to run */
+/* SUBSCRIBE RET VALUE test cases to run */
 TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackSubscrOk)
 {
     // Given
     // When
-    subscr_status_e ret_status = subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscr_status_e ret_status = subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
     TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, ret_status);
 }
@@ -124,7 +124,7 @@ TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWith0LenghtThen
 {
     // Given
     // When
-    subscr_status_e ret_status = subscribe(subscribtion, mock_fun_1, 0);
+    subscr_status_e ret_status = subscribe(subscription, mock_fun_1, 0);
     // Then
     TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
 }
@@ -133,7 +133,7 @@ TEST(observer_subscribe, WhenSubscribeNullToSubscriptionTableWithWitnNonZeroLeng
 {
     // Given
     // When
-    subscr_status_e ret_status = subscribe(subscribtion, NULL, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscr_status_e ret_status = subscribe(subscription, NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
     TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
 }
@@ -142,7 +142,7 @@ TEST(observer_subscribe, WhenSubscribeMockFun1ToNullPtrSubscriptionTableWitnNonZ
 {
     // Given
     // When
-    subscr_status_e ret_status = subscribe(NULL, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscr_status_e ret_status = subscribe(NULL, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
     TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
 }
