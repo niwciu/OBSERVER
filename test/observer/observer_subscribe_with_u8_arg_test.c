@@ -82,25 +82,6 @@ TEST(observer_subscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenSubscribe3Fu
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 }
 
-TEST(observer_subscribe_with_u8_arg, GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError)
-{
-    for (uint8_t i = 0; i < SUBSCRIPTION_CALLBACKS_TABLE_SIZE; i++)
-    {
-        subscription[i] = mock_dirty_fun_with_u8_arg;
-    }
-
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
-}
-
-TEST(observer_subscribe_with_u8_arg, GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk)
-{
-    for (uint8_t i = 0; i < SUBSCRIPTION_CALLBACKS_TABLE_SIZE - 1; i++)
-    {
-        subscription[i] = mock_dirty_fun_with_u8_arg;
-    }
-
-    TEST_ASSERT_EQUAL(OBSERVER_OK, subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
-}
 
 TEST(observer_subscribe_with_u8_arg, GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled)
 {
@@ -116,7 +97,17 @@ TEST(observer_subscribe_with_u8_arg, GivenEmptyTableWhenSubscribeSameCallback3Ti
 }
 
 /* SUBSCRIBE RET VALUE test cases to run */
-TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackSubscrOk)
+TEST(observer_subscribe_with_u8_arg, GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError)
+{
+    for (uint8_t i = 0; i < SUBSCRIPTION_CALLBACKS_TABLE_SIZE; i++)
+    {
+        subscription[i] = mock_dirty_fun_with_u8_arg;
+    }
+
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
+}
+
+TEST(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToObserverOk)
 {
     // Given
     // When

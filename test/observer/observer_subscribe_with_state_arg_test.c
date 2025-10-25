@@ -82,26 +82,6 @@ TEST(observer_subscribe_with_state_arg, GivenSubscriptionTableEmptyWhenSubscribe
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 }
 
-TEST(observer_subscribe_with_state_arg, GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError)
-{
-    for (uint8_t i = 0; i < SUBSCRIPTION_CALLBACKS_TABLE_SIZE; i++)
-    {
-        subscription[i] = mock_dirty_fun_with_arg;
-    }
-
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe_state_change(subscription, mock_fun_with_state_arg, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
-}
-
-TEST(observer_subscribe_with_state_arg, GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk)
-{
-    for (uint8_t i = 0; i < SUBSCRIPTION_CALLBACKS_TABLE_SIZE - 1; i++)
-    {
-        subscription[i] = mock_dirty_fun_with_arg;
-    }
-
-    TEST_ASSERT_EQUAL(OBSERVER_OK, subscribe_state_change(subscription, mock_fun_with_state_arg, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
-}
-
 TEST(observer_subscribe_with_state_arg, GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled)
 {
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_state_t);
@@ -116,7 +96,17 @@ TEST(observer_subscribe_with_state_arg, GivenEmptyTableWhenSubscribeSameCallback
 }
 
 /* SUBSCRIBE RET VALUE test cases to run */
-TEST(observer_subscribe_with_state_arg, WhenSubscribeStateChangeMockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackSubscrOk)
+TEST(observer_subscribe_with_state_arg, GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError)
+{
+    for (uint8_t i = 0; i < SUBSCRIPTION_CALLBACKS_TABLE_SIZE; i++)
+    {
+        subscription[i] = mock_dirty_fun_with_arg;
+    }
+
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe_state_change(subscription, mock_fun_with_state_arg, SUBSCRIPTION_CALLBACKS_TABLE_SIZE));
+}
+
+TEST(observer_subscribe_with_state_arg, WhenSubscribeStateChangeMockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToObserverOk)
 {
     // Given
     // When

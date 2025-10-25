@@ -63,31 +63,6 @@ TEST(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribe3functionsThenF
     TEST_ASSERT_EQUAL_MEMORY_ARRAY(expexted_subscription, subscription, memory_obj_byte_len, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
 }
 
-TEST(observer_subscribe, GivenSubscriptionTableFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnSubscriptionTableFullStatus)
-{
-    // Given
-    for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
-    {
-        subscription[i] = mock_dirty_fun;
-    }
-    // When
-    // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
-    // Then
-}
-
-TEST(observer_subscribe, GivenSubscriptionTableNotFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnCallbackSubscribedOk)
-{
-    // Given
-    for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE - 1; i++)
-    {
-        subscription[i] = mock_dirty_fun;
-    }
-    // When
-    // Then
-    TEST_ASSERT_EQUAL(OBSERVER_OK, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
-}
-
 TEST(observer_subscribe, GivenSubscriptionTableEmptyWhenSubscribeMockFun1ToSubscriptionTableThreeTimesThenFirstElementOfSubscriptionTableIsEqualToMockFun1AndRestElementsAreEmpty)
 {
     static uint32_t memory_obj_byte_len = sizeof(observer_cb_t);
@@ -111,7 +86,20 @@ static void clear_subscription_table(void)
 }
 
 /* SUBSCRIBE RET VALUE test cases to run */
-TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackSubscrOk)
+TEST(observer_subscribe, GivenSubscriptionTableFullWhenSubscribeMockFun1ToSubscriptionTableThenFunctionReturnSubscriptionTableFullStatus)
+{
+    // Given
+    for (uint8_t i = 0; i < SUBSCRIPTION_CALBACKS_TABLE_SIZE; i++)
+    {
+        subscription[i] = mock_dirty_fun;
+    }
+    // When
+    // Then
+    TEST_ASSERT_EQUAL(SUBSCR_ERROR_TABLE_FULL, subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE));
+    // Then
+}
+
+TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToObserverOk)
 {
     // Given
     // When
