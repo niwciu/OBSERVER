@@ -60,15 +60,18 @@ TEST(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3Subs
     TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_mock_counter, mock_fun_counter, MOCK_COUNTER_QTY);
 }
 
-// TEST(observer_notice, )
-// {
-//     // Given
+TEST(observer_notice, GivenMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThenRetValueEqualObserverOk)
+{
 
-//     // When
-
-//     // Then
-//     TEST_FAIL_MESSAGE("Added new test")
-// }
+    // Given
+    subscribe(subscription, mock_fun_1, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_2, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    subscribe(subscription, mock_fun_3, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // When
+    subscr_status_e ret_status = notify(subscription, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
+}
 
 // TEST(observer_notice, )
 // {

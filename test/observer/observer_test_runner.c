@@ -120,7 +120,7 @@ TEST_GROUP_RUNNER(observer_notice)
     RUN_TEST_CASE(observer_notice, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedAndNoticeCalledAndMock2FunUnsubscribedWhenNoticeCalledThenSubscribedMockFun1AndMockFun3CountersEqual2AndMockFun2CounterEqual1);
     
     /* SUBSCRIBE RET VALUE test cases to run */
-    // RUN_TEST_CASE(observer_notice, GivenMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThenRetValueEqualObserverOk);
+    RUN_TEST_CASE(observer_notice, GivenMockFun1MockFun2MockFun3SubscribedWhenNoticeCalledThenRetValueEqualObserverOk);
 }
 
 TEST_GROUP_RUNNER(observer_notice_with_arg)
