@@ -41,6 +41,12 @@ TEST_GROUP_RUNNER(observer_subscribe_with_u8_arg)
     RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenFullTableWhenSubscribeAnotherCallbackThenReturnTableFullError);
     RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenNotFullTableWhenSubscribeThenReturnCallbackSubscribedOk);
     RUN_TEST_CASE(observer_subscribe_with_u8_arg, GivenEmptyTableWhenSubscribeSameCallback3TimesThenOnlyFirstSlotIsFilled);
+
+    /* SUBSCRIBE RET VALUE test cases to run */
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackSubscrOk);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToSubscriptionTableWith0LenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, WhenSubscribeU8NullToSubscriptionTableWithWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument);
+    RUN_TEST_CASE(observer_subscribe_with_u8_arg, WhenSubscribeU8MockFun1ToNullPtrSubscriptionTableWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument);
 }
 
 TEST_GROUP_RUNNER(observer_unsubscribe)

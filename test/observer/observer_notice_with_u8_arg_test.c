@@ -11,17 +11,17 @@ static void clear_subscription_table(void);
 static void mock_reset_mock_fun_with_arg_counters(void);
 
 // Mockowane funkcje z argumentem (przyjmują `void*` i zwiększają odpowiedni licznik)
-static void mock_fun_with_arg_1(uint8_t u8_arg)
+static void mock_fun_with_u8_arg_1(uint8_t u8_arg)
 {
     (void)u8_arg;
     mock_fun_with_arg_counter[0]++;
 }
-static void mock_fun_with_arg_2(uint8_t u8_arg)
+static void mock_fun_with_u8_arg_2(uint8_t u8_arg)
 {
     (void)u8_arg;
     mock_fun_with_arg_counter[1]++;
 }
-static void mock_fun_with_arg_3(uint8_t u8_arg)
+static void mock_fun_with_u8_arg_3(uint8_t u8_arg)
 {
     (void)u8_arg;
     mock_fun_with_arg_counter[2]++;
@@ -44,9 +44,9 @@ TEST(observer_notice_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenN
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {1, 1, 1};
 
     // Given
-    subscribe_u8(subscription, mock_fun_with_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_u8(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_u8(subscription, mock_fun_with_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     // When
     notify_u8(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
@@ -60,13 +60,13 @@ TEST(observer_notice_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyR
     static uint8_t expected_mock_counter[MOCK_COUNTER_QTY] = {2, 1, 2};
 
     // Given
-    subscribe_u8(subscription, mock_fun_with_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_u8(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
-    subscribe_u8(subscription, mock_fun_with_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_1, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    subscribe_u8(subscription, mock_fun_with_u8_arg_3, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     notify_u8(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_ENTER);
 
-    unsubscribe_u8(subscription, mock_fun_with_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
+    unsubscribe_u8(subscription, mock_fun_with_u8_arg_2, SUBSCRIPTION_CALLBACKS_TABLE_SIZE);
 
     // When
     notify_u8(subscription, SUBSCRIPTION_CALLBACKS_TABLE_SIZE, EVENT_STATE_EXIT);
