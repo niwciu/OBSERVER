@@ -24,7 +24,7 @@ TEST_TEAR_DOWN(observer_unsubscribe_with_state_arg)
 {
 }
 
-TEST(observer_unsubscribe_with_state_arg, GivenMockFun1SubscribedWhenUnsubThenTableIsEmpty)
+TEST(observer_unsubscribe_with_state_arg, GivenDummyCbSubscribedWhenUnsubThenTableIsEmpty)
 {
     static uint32_t len = sizeof(observer_cb_state_t);
     static observer_cb_state_t expected[SUBSCRIPTION_CALBACKS_TABLE_SIZE] = {NULL};
@@ -225,7 +225,7 @@ TEST(observer_unsubscribe_with_state_arg, GivenTableFullOfSameFunWhenUnsubThenTa
 }
 
 /* SUBSCRIBE RET VALUE test cases to run */
-TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeMockFun1FromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeDummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
 {
     // Given
     subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
@@ -235,7 +235,7 @@ TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsub
     TEST_ASSERT_EQUAL(OBSERVER_OK, ret_status);
 }
 
-TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeMockFun1FromSubscriptionTableWitZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeDummyCbFromSubscriptionTableWitZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
 {
     // Given
     subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
@@ -255,7 +255,7 @@ TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsub
     TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
 }
 
-TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeMockFun1FromNullPtrSubscrTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
+TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeDummyCbFromNullPtrSubscrTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
 {
     // Given
     subscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
