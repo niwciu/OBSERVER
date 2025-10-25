@@ -120,7 +120,9 @@ TEST_GROUP_RUNNER(observer_notify)
     RUN_TEST_CASE(observer_notify, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3SubscribedAndNotifyCalledAndMock2FunUnsubscribedWhenNotifyCalledThenSubscribedMockFun1AndMockFun3CountersEqual2AndMockFun2CounterEqual1);
     
     /* SUBSCRIBE RET VALUE test cases to run */
-    RUN_TEST_CASE(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledThenRetValueEqualObserverOk);
+    RUN_TEST_CASE(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverOk);
+    RUN_TEST_CASE(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWithNullPtrAndNonZeroSubscrTableLenThenRetValueEqualObserverOk);
+    RUN_TEST_CASE(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWithSubscrCallbackTablePtrAndSubscrTableLenEqual0ThenRetValueEqualObserverOk);
 }
 
 TEST_GROUP_RUNNER(observer_notify_with_arg)
@@ -133,4 +135,5 @@ TEST_GROUP_RUNNER(observer_notify_with_u8_arg)
 {
     RUN_TEST_CASE(observer_notify_with_u8_arg, GivenMockCountersResetedAndAll3SubscribedWhenNotifyWithArgCalledThenEachCounterIncreased);
     RUN_TEST_CASE(observer_notify_with_u8_arg, GivenAll3SubscribedAndOneUnsubscribedThenOnlyRemainingAreNotified);
+    
 }

@@ -61,7 +61,7 @@ TEST(observer_notify, GivenMockFunCountersResetedAndMockFun1MockFun2MockFun3Subs
 }
 
 /* SUBSCRIBE RET VALUE test cases to run */
-TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledThenRetValueEqualObserverOk)
+TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverOk)
 {
 
     // Given
