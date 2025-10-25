@@ -109,3 +109,41 @@ static void clear_subscription_table(void)
         subscribtion[i] = NULL;
     }
 }
+
+/* SUBSCRIPTION RET VALUE test cases to run */
+TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCallbackSubscrOk)
+{
+    // Given
+    // When
+    subscr_status_e ret_status = subscribe(subscribtion, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_SUBSCR_OK, ret_status);
+}
+
+TEST(observer_subscribe, WhenSubscribeMockFun1ToSubscriptionTableWith0LenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
+{
+    // Given
+    // When
+    subscr_status_e ret_status = subscribe(subscribtion, mock_fun_1, 0);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+}
+
+TEST(observer_subscribe, WhenSubscribeNullToSubscriptionTableWithWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
+{
+    // Given
+    // When
+    subscr_status_e ret_status = subscribe(subscribtion, NULL, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+}
+
+TEST(observer_subscribe, WhenSubscribeMockFun1ToNullPtrSubscriptionTableWitnNonZeroLenghtThenReturnedValueIsEqualToCallbackErrorInvalidArgument)
+{
+    // Given
+    // When
+    subscr_status_e ret_status = subscribe(NULL, mock_fun_1, SYBSCRIPTION_CALBACKS_TABLE_SIZE);
+    // Then
+    TEST_ASSERT_EQUAL(CALLBACK_ERROR_INVALID_ARGUMENT, ret_status);
+}
+
