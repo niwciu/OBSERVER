@@ -1,94 +1,73 @@
-###########################################################################
-# IMPORTANT
-# In settings->Environments -> github_pages branches from which pull request 
-# should trigger page deploy need to be added
-###########################################################################
-
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Project page and reports deploy
+name: Build and deploy MkDocs site with reports
 
 on:
-  
-  # pull_request: 
-  #   types:
-  #     - closed
-  #   branches:
-  #     - main
-    
-  # Allows you to run this workflow manually from the Actions tab
+  pull_request:
+    types: [closed]
+    branches: [main]
   workflow_dispatch:
-  # workflow_run:
-  #   workflows: [Build]
-  #   types: [completed]
-  #   branches: [main]
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# Do NOT cancel in-progress runs as we want these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
-
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     steps:
-      - name: Checkout base branch (main)
+      - name: Checkout base branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
       - name: Create Reports Folder
-        run: mkdir -p reports
-      
+        run: mkdir -p docs/reports
+
       - name: Download CCR artifact
-        id: download-ccr-artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           name: Code_Coverage_Report
           repo: ${{ github.repository }}
           workflow: CI_Pipeline.yml
-          path: ./reports/
+          path: ./docs/reports/CCR
           search_artifacts: true
 
       - name: Download CCM artifact
-        id: download-ccm-artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           name: Code_Complexity_Report
           repo: ${{ github.repository }}
           workflow: CI_Pipeline.yml
-          path: ./reports/
+          path: ./docs/reports/CCM
           search_artifacts: true
 
-      # - name: Generate Doxygen html doc
-      #   uses: mattnotmitt/doxygen-action@v1.9.5
-      #   with:
-      #       working-directory: './doc/'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs + Material
+        run: pip install mkdocs mkdocs-material
+
+      - name: Build MkDocs site
+        run: mkdocs build --strict
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
 
   cleanup:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     permissions: write-all
     steps:
       - name: 🗑 Delete deployment
@@ -98,7 +77,6 @@ jobs:
           environment: github-pages
           onlyRemoveDeployments: true
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages
