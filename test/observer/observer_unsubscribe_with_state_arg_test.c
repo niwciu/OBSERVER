@@ -232,7 +232,7 @@ TEST(observer_unsubscribe_with_state_arg, GivenSubscriptionTableEmptyWhenUnsubsc
     // When
     subscr_status_e ret_status = unsubscribe_state_change(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_NOT_FOUND_ERROR, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_TABLE_EMPTY_ERROR, ret_status);
 }
 
 TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeDummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToObserverOk)
@@ -252,7 +252,7 @@ TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsub
     // When
     subscr_status_e ret_status = unsubscribe_state_change(subscription, dummy_cb, 0);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
 
 TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeNullPtrFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
@@ -262,7 +262,7 @@ TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsub
     // When
     subscr_status_e ret_status = unsubscribe_state_change(subscription, NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
 
 TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeStateChangeDummyCbFromNullPtrSubscrTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
@@ -272,7 +272,7 @@ TEST(observer_unsubscribe_with_state_arg, GivenMocFun1FuncionSubscribedWhenUnsub
     // When
     subscr_status_e ret_status = unsubscribe_state_change(NULL, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
 
 static void clear_subscription_table(void)

@@ -233,7 +233,7 @@ TEST(observer_unsubscribe_with_u8_arg, GivenSubscriptionTableEmptyWhenUnsubscrib
     // When
     subscr_status_e ret_status = unsubscribe_u8(subscription, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(CALLBACK_NOT_FOUND_ERROR, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_TABLE_EMPTY_ERROR, ret_status);
 }
 
 TEST(observer_unsubscribe_with_u8_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeU8DummyCbFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrOk)
@@ -253,7 +253,7 @@ TEST(observer_unsubscribe_with_u8_arg, GivenMocFun1FuncionSubscribedWhenUnsubscr
     // When
     subscr_status_e ret_status = unsubscribe_u8(subscription, dummy_cb, 0);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
 
 TEST(observer_unsubscribe_with_u8_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeU8NullPtrFromSubscriptionTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
@@ -263,7 +263,7 @@ TEST(observer_unsubscribe_with_u8_arg, GivenMocFun1FuncionSubscribedWhenUnsubscr
     // When
     subscr_status_e ret_status = unsubscribe_u8(subscription, NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
 
 TEST(observer_unsubscribe_with_u8_arg, GivenMocFun1FuncionSubscribedWhenUnsubscribeU8DummyCbFromNullPtrSubscrTableWitnNonZeroLenghtThenRetValueIsEqualToCalbbackSubscrErrorInvalidArgument)
@@ -273,7 +273,7 @@ TEST(observer_unsubscribe_with_u8_arg, GivenMocFun1FuncionSubscribedWhenUnsubscr
     // When
     subscr_status_e ret_status = unsubscribe_u8(NULL, dummy_cb, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
 
 static void clear_subscription_table(void)

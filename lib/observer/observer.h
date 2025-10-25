@@ -54,8 +54,8 @@ extern "C" {
  * @param[in] subscription_table_size Number of entries in the table (must > 0).
  *
  * @return OBSERVER_OK             Callback registered or already present.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
- * @return SUBSCR_ERROR_TABLE_FULL      No free slot available.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
+ * @return OBSERVER_TABLE_FULL_ERROR      No free slot available.
  *
  * @pre  `subscription_table` points to a valid array of given size.
  * @post On success, `cb_2_register` is stored in the table.
@@ -75,8 +75,8 @@ subscr_status_e subscribe(observer_cb_t *subscription_table, observer_cb_t cb_2_
  * @param[in] subscription_table_size Table length.
  *
  * @return OBSERVER_OK             Callback successfully removed.
- * @return CALLBACK_NOT_FOUND_ERROR       Callback not found.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
+ * @return OBSERVER_TABLE_EMPTY_ERROR       Callback not found.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
  *
  * @pre  Valid table pointer of given size.
  * @post Table compacted after removal.
@@ -94,8 +94,8 @@ subscr_status_e unsubscribe(observer_cb_t *subscription_table, observer_cb_t cb_
  * @param[in] subscription_table_size Table length.
  *
  * @return OBSERVER_OK             At least one callback invoked.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
- * @return CALLBACK_NOT_FOUND_ERROR       No callbacks registered.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
+ * @return OBSERVER_TABLE_EMPTY_ERROR       No callbacks registered.
  *
  * @pre  Valid table pointer of given size.
  * @post All active callbacks are executed once.
@@ -116,8 +116,8 @@ subscr_status_e notify(observer_cb_t *subscription_table,
  * @param[in] subscription_table_size Table length.
  *
  * @return OBSERVER_OK             Callback registered or already present.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
- * @return SUBSCR_ERROR_TABLE_FULL      No free slot.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
+ * @return OBSERVER_TABLE_FULL_ERROR      No free slot.
  *
  * @pre  Valid table pointer of given size.
  * @post Callback stored on success.
@@ -133,8 +133,8 @@ subscr_status_e subscribe_state_change(observer_cb_state_t *subscription_table, 
  * @param[in] subscription_table_size Table length.
  *
  * @return OBSERVER_OK             Callback removed.
- * @return CALLBACK_NOT_FOUND_ERROR       Callback not found.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
+ * @return OBSERVER_TABLE_EMPTY_ERROR       Callback not found.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
  *
  * @pre  Valid table pointer of given size.
  * @post Table compacted after removal.
@@ -150,8 +150,8 @@ subscr_status_e unsubscribe_state_change(observer_cb_state_t *subscription_table
  * @param[in] state Event state passed to callbacks.
  *
  * @return OBSERVER_OK             At least one callback invoked.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
- * @return CALLBACK_NOT_FOUND_ERROR       No callbacks registered.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
+ * @return OBSERVER_TABLE_EMPTY_ERROR       No callbacks registered.
  *
  * @pre  Valid table pointer of given size.
  * @post All registered callbacks called with `state`.
@@ -171,8 +171,8 @@ subscr_status_e notify_enter_exit(observer_cb_state_t *subscription_table, uint8
  * @param[in] subscription_table_size Table length.
  *
  * @return OBSERVER_OK             Callback registered or already present.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
- * @return SUBSCR_ERROR_TABLE_FULL      No free slot.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
+ * @return OBSERVER_TABLE_FULL_ERROR      No free slot.
  *
  * @pre  Valid table pointer of given size.
  * @post Callback stored on success.
@@ -188,8 +188,8 @@ subscr_status_e subscribe_u8(observer_cb_u8_arg_t *subscription_table, observer_
  * @param[in] subscription_table_size Table length.
  *
  * @return OBSERVER_OK             Callback removed.
- * @return CALLBACK_NOT_FOUND_ERROR       Callback not found.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
+ * @return OBSERVER_TABLE_EMPTY_ERROR       Callback not found.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
  *
  * @pre  Valid table pointer of given size.
  * @post Table compacted after removal.
@@ -205,8 +205,8 @@ subscr_status_e unsubscribe_u8(observer_cb_u8_arg_t *subscription_table, observe
  * @param[in] data Data argument passed to each callback.
  *
  * @return OBSERVER_OK             At least one callback invoked.
- * @return SUBSCR_ERROR_INVALID_ARGUMENT Null pointer or zero size.
- * @return CALLBACK_NOT_FOUND_ERROR       No callbacks registered.
+ * @return OBSERVER_INVALID_ARGUMENT_ERROR Null pointer or zero size.
+ * @return OBSERVER_TABLE_EMPTY_ERROR       No callbacks registered.
  *
  * @pre  Valid table pointer of given size.
  * @post All registered callbacks called with `data`.

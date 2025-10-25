@@ -20,15 +20,15 @@ extern "C"
      *
      * Note:
      *  - OBSERVER_OK == 0 (success)
-     *  - SUBSCR_ERROR_INVALID_ARGUMENT indicates invalid input parameters (NULL pointers, zero size).
-     *  - SUBSCR_ERROR_TABLE_FULL indicates there were no free slots in the subscription table.
+     *  - OBSERVER_INVALID_ARGUMENT_ERROR indicates invalid input parameters (NULL pointers, zero size).
+     *  - OBSERVER_TABLE_FULL_ERROR indicates there were no free slots in the subscription table.
      */
     typedef enum
     {
         OBSERVER_OK = 0u,
-        SUBSCR_ERROR_INVALID_ARGUMENT = 1u,
-        SUBSCR_ERROR_TABLE_FULL = 2u,
-        CALLBACK_NOT_FOUND_ERROR = 3u
+        OBSERVER_INVALID_ARGUMENT_ERROR = 1u,
+        OBSERVER_TABLE_FULL_ERROR = 2u,
+        OBSERVER_TABLE_EMPTY_ERROR = 3u
     } subscr_status_e;
 
     /**

@@ -86,7 +86,7 @@ TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWit
     // When
     subscr_status_e ret_status = notify(NULL, SUBSCRIPTION_CALBACKS_TABLE_SIZE);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
 
 TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWithSubscrCallbackTablePtrAndSubscrTableLenEqual0ThenRetValueEqualObserverOk)
@@ -99,9 +99,9 @@ TEST(observer_notify, GivenMockFun1MockFun2MockFun3SubscribedWhenNotifyCalledWit
     // When
     subscr_status_e ret_status = notify(subscription, 0);
     // Then
-    TEST_ASSERT_EQUAL(SUBSCR_ERROR_INVALID_ARGUMENT, ret_status);
+    TEST_ASSERT_EQUAL(OBSERVER_INVALID_ARGUMENT_ERROR, ret_status);
 }
-// TEST(observer_notify, )
+// TEST(observer_notify, GivenSubscriptionTableEmptyWhenNotifyCalledWithSubscrCallbackTablePtrAndNonZeroSubscrTableLenThenRetValueEqualObserverTableEmptyError)
 // {
 //     // Given
 
