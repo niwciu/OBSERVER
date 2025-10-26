@@ -1,4 +1,4 @@
-![observer\_header](https://github.com/user-attachments/assets/4c9970c9-6374-44e9-a40a-0a5bfc5a0b43)
+![observer_header](https://github.com/user-attachments/assets/4c9970c9-6374-44e9-a40a-0a5bfc5a0b43)
 
 # 🧩 Observer Library (MISRA-C / Safety-Critical)
 
@@ -15,7 +15,7 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 
 <b><a href='https://niwciu.github.io/OBSERVER/reports/gcovr.html'>Library GCOVR Report</a></b> <br>
 <b><a href='https://niwciu.github.io/OBSERVER/reports/code_complexity_report.html'>Library Code Complexity Report</a></b><br>
-<b><a href='https://niwciu.github.io/OBSERVER/doxygen/observer_lib_doc/html/index.html'>Library Code Complexity Report</a></b>
+<b><a href='https://niwciu.github.io/OBSERVER/doxygen/observer_lib_doc/html/index.html'>Library Doxygen Documentation</a></b>
 
 ---
 
@@ -36,30 +36,35 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 ```
 /observer_lib/
 ├── .github/   
-│   └── workflows/                     # Github Actions workflows                            
-├── docs/                              # Files required for deploy library webpage & publish documentation
+│   └── workflows/                      # Github Actions workflows                            
+├── docs/                               # Files required for deploy library webpage & publish documentation
 ├── examples/
-│   ├── basic_observer/                # Basic no-arg callback
-│   ├── state_observer/                # Uses event_state_e argument callback
-│   ├── observer_u8/                   # Uses uint8_t argument callback
-│   └── README.md                      # Examples description file
+│   ├── basic_observer/                 # Basic no-arg callback
+│   ├── state_observer/                 # Uses event_state_e argument callback
+│   ├── observer_u8/                    # Uses uint8_t argument callback
+│   └── README.md                       # Examples description file
 │ 
-├── hw/                                # Cpecific hardware configurations
+├── hw/                                 # Cpecific hardware configurations
 ├── lib/
 │   └── observer/
-│        ├── observer.c                # Core implementation
-│        ├── observer.h                # Public API
-│        └── observer_public_types.h   # Enums & callback typedefs
+│       ├── observer.c                  # Core implementation
+│       ├── observer.c                  # Core implementation
+│       ├── observer.h                  # Public API
+│       └── observer_public_types.h     # Enums & callback typedefs
 ├── test/
 │   ├── config_scripts/ 
-│   │    ├── run_targets               # CI python script to run on local machine  
-│   │    └── venv_setup                # Python script for setting up venv and install dependencies            
-│   ├── observer/                      # Unit tests (Unity)
-│   ├── template/                      # Module unit tests template
-│   └── unity/                         # Test framework
-├── .clang-format                      # clang-foramt rules
+│   │   ├── run_targets               
+│   │   │   └── CI.py                   # CI python script to run on local machine 
+│   │   │   └── config.yaml             # CI config file for setup and customize CI workflow    
+│   │   └── venv_setup                   
+│   │       └── requirements.txt        # Python tools required by scripts in project
+│   │       └── venv_setup.py           # Python script for setting up venv and install dependencies        
+│   ├── observer/                       # Unit tests (Unity)
+│   ├── template/                       # Module unit tests template
+│   └── unity/                          # Test framework
+├── .clang-format                       # clang-foramt rules
 ├── LICENSE                             
-├── mkdocs.yml                         # MkDocs deploy settings 
+├── mkdocs.yml                          # MkDocs deploy settings 
 └── README.md
 ```
 
@@ -306,7 +311,7 @@ make format_test
 | SC-2 | Deterministic control flow   |     ✅     |
 | SC-3 | Input validation on all APIs |     ✅     |
 | SC-4 | MISRA-C:2012 compliance      |     ✅     |
-| SC-5 | Unit test coverage ≥ 90 %    | ✅ (100 %) |
+| SC-5 | Unit test coverage ≥ 90 %    |     ✅     |
 | SC-6 | Thread safety documented     |     ✅     |
 | SC-7 | Static analysis clean        |     ✅     |
 
@@ -362,10 +367,8 @@ Released under the **MIT License** — see [`LICENSE`](LICENSE).
 
 ---
 
-<div align="center">
-
-![myEmbeddedWayBannerWhiteSmaller](https://github.com/user-attachments/assets/f4825882-e285-4e02-a75c-68fc86ff5716)
-
-</div>
+<p style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/f4825882-e285-4e02-a75c-68fc86ff5716" alt="myEmbeddedWayBanner">
+</p>
 
 ---
