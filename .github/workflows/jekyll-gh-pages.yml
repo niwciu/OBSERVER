@@ -8,7 +8,6 @@
 name: Project page and reports deploy
 
 on:
-  
   # pull_request: 
   #   types:
   #     - closed
@@ -73,6 +72,13 @@ jobs:
       #   uses: mattnotmitt/doxygen-action@v1.9.5
       #   with:
       #       working-directory: './doc/'
+
+      # edit this step to meet your repo requirements
+      - name: Generate _config.yml
+        run: |
+          echo "title: OBSERVER" > _config.yml
+          echo "description: Embedded C Project documentation and reports" >> _config.yml
+          echo "theme: minima" >> _config.yml
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -1,22 +1,32 @@
 /**
  * @file observer.c
- * @author niwciu
- * @date 2025-10-25
- * @brief Observer pattern implementation (deterministic, safety-critical oriented)
+ * @brief Deterministic Observer pattern implementation for safety-critical systems.
  *
  * @details
- * This source file implements a deterministic, static memory Observer pattern.
- * All API functions validate input parameters and return clear error codes.
+ *   Implements a static, deterministic variant of the Observer pattern suitable
+ *   for safety-critical and resource-constrained embedded environments.
  *
- * Features:
- *  - No dynamic memory allocation.
- *  - Deterministic table-based subscription management.
- *  - Supports callbacks with void, uint8_t, or event_state_e arguments.
- *  - Single-point return style in unsubscribe functions for MISRA C / ISO 26262 compliance.
+ *   All API functions:
+ *     - Validate input parameters.
+ *     - Return deterministic status codes.
+ *     - Avoid dynamic memory allocation.
+ *     - Use single-point return for MISRA C Rule 15.5 compliance.
  *
- * Thread Safety:
- *  - API functions are NOT reentrant or thread-safe.
- *  - Caller must provide synchronization if concurrent access from multiple tasks/ISRs is possible.
+ * @thread_safety
+ *   None of the API functions are reentrant or thread-safe.
+ *   Caller must ensure synchronization if used concurrently.
+ *
+ * @version 1.0.0
+ * @date 2025-10-25
+ * @ingroup observer
+ * @autho
+ *   niwciu (niwciu@gmail.com)
+ *
+ * @copyright
+ *   Copyright (c) 2025
+ *
+ * @safety
+ *   Designed to meet MISRA C 2012 and ISO 26262 Part 6 software safety goals.
  */
 
 #include "observer.h"
@@ -30,6 +40,7 @@
 
 subscr_status_e subscribe(observer_cb_t *subscription_table, observer_cb_t cb_2_register, uint8_t subscription_table_size)
 {
+    /* MISRA C: Rule 15.5 compliant — single exit point used. */
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
 
     if ((subscription_table != NULL) && (cb_2_register != NULL) && (subscription_table_size != 0u))
@@ -62,17 +73,17 @@ subscr_status_e subscribe(observer_cb_t *subscription_table, observer_cb_t cb_2_
     return status;
 }
 
-subscr_status_e unsubscribe(observer_cb_t *subscription_table, observer_cb_t cb_2_register, uint8_t subscription_table_size)
+subscr_status_e unsubscribe(observer_cb_t *subscription_table, observer_cb_t cb_2_remove, uint8_t subscription_table_size)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
 
-    if ((subscription_table != NULL) && (cb_2_register != NULL) && (subscription_table_size != 0u))
+    if ((subscription_table != NULL) && (cb_2_remove != NULL) && (subscription_table_size != 0u))
     {
         status = OBSERVER_TABLE_EMPTY_ERROR;
 
         for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
-            if (subscription_table[i] == cb_2_register)
+            if (subscription_table[i] == cb_2_remove)
             {
                 for (uint8_t j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
                 {
@@ -147,17 +158,17 @@ subscr_status_e subscribe_state_change(observer_cb_state_t *subscription_table, 
     return status;
 }
 
-subscr_status_e unsubscribe_state_change(observer_cb_state_t *subscription_table, observer_cb_state_t cb_2_register, uint8_t subscription_table_size)
+subscr_status_e unsubscribe_state_change(observer_cb_state_t *subscription_table, observer_cb_state_t cb_2_remove, uint8_t subscription_table_size)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
 
-    if ((subscription_table != NULL) && (cb_2_register != NULL) && (subscription_table_size != 0u))
+    if ((subscription_table != NULL) && (cb_2_remove != NULL) && (subscription_table_size != 0u))
     {
         status = OBSERVER_TABLE_EMPTY_ERROR;
 
         for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
-            if (subscription_table[i] == cb_2_register)
+            if (subscription_table[i] == cb_2_remove)
             {
                 for (uint8_t j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
                 {
@@ -232,17 +243,17 @@ subscr_status_e subscribe_u8(observer_cb_u8_arg_t *subscription_table, observer_
     return status;
 }
 
-subscr_status_e unsubscribe_u8(observer_cb_u8_arg_t *subscription_table, observer_cb_u8_arg_t cb_2_register, uint8_t subscription_table_size)
+subscr_status_e unsubscribe_u8(observer_cb_u8_arg_t *subscription_table, observer_cb_u8_arg_t cb_2_remove, uint8_t subscription_table_size)
 {
     subscr_status_e status = OBSERVER_INVALID_ARGUMENT_ERROR;
 
-    if ((subscription_table != NULL) && (cb_2_register != NULL) && (subscription_table_size != 0u))
+    if ((subscription_table != NULL) && (cb_2_remove != NULL) && (subscription_table_size != 0u))
     {
         status = OBSERVER_TABLE_EMPTY_ERROR;
 
         for (uint8_t i = 0u; i < subscription_table_size; ++i)
         {
-            if (subscription_table[i] == cb_2_register)
+            if (subscription_table[i] == cb_2_remove)
             {
                 for (uint8_t j = i; j < (uint8_t)(subscription_table_size - 1u); ++j)
                 {

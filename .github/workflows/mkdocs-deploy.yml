@@ -1,4 +1,4 @@
-name: Build and deploy MkDocs site with reports
+name: Deploy MkDocs lib webpage
 
 on:
   pull_request:
@@ -18,15 +18,15 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout base branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
-      - name: Create Reports Folder
-        run: mkdir -p docs/reports
+      - name: Create docs Folder and subfolders
+        run: mkdir -p docs/reports docs/examples
 
       - name: Download CCR artifact
         uses: dawidd6/action-download-artifact@v2
@@ -34,7 +34,7 @@ jobs:
           name: Code_Coverage_Report
           repo: ${{ github.repository }}
           workflow: CI_Pipeline.yml
-          path: ./docs/reports/CCR
+          path: ./docs/reports
           search_artifacts: true
 
       - name: Download CCM artifact
@@ -43,8 +43,19 @@ jobs:
           name: Code_Complexity_Report
           repo: ${{ github.repository }}
           workflow: CI_Pipeline.yml
-          path: ./docs/reports/CCM
+          path: ./docs/reports
           search_artifacts: true
+
+      - name: Copy README.md to docs/
+        run:  cp README.md docs/README.md
+
+      - name: Copy examples README.md to docs/
+        run:  cp ./examples/README.md docs/examples/README.md
+
+      - name: Generate Doxygen html doc
+        uses: mattnotmitt/doxygen-action@v1.9.5
+        with:
+            working-directory: './docs/doxygen'
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -67,7 +78,7 @@ jobs:
 
   cleanup:
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     permissions: write-all
     steps:
       - name: 🗑 Delete deployment

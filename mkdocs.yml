@@ -1,0 +1,79 @@
+site_name: OBSERVER Embedded C Library
+site_description: Automatycznie generowana z README.md + raporty
+site_url: https://niwciu.github.io/OBSERVER/
+repo_url: https://github.com/niwciu/OBSERVER
+
+
+theme:
+  name: material
+  language: en
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  features:
+    - navigation.instant
+    - navigation.top
+    - navigation.sections
+    - navigation.expand
+    - navigation.footer
+    - content.code.copy
+    # - content.action.edit
+    - content.tabs.link
+    - content.tooltips
+    - content.code.annotate
+    - header.autohide
+    - footer.social
+  palette:
+    #dark theme
+    - scheme: slate  
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
+      # primary: green
+      accent: deep purple
+    #light theme
+    - scheme: default  
+      toggle:
+        icon: material/weather-night
+        name: Light mode
+      primary: blue
+      accent: deep orange
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - admonition
+  - pymdownx.details
+  - toc:
+      permalink: true
+      toc_depth: 2
+  - tables
+  - pymdownx.highlight
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: README.md
+  - Examples info: examples/README.md
+  - Reports: reports.md
+  - Doxygen docu: doxygen/observer_lib_doc/html/index.html
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/niwciu/OBSERVER
+    - icon: fontawesome/solid/envelope
+      link: mailto:niwciu@gmail.com
+    - icon: simple/youtube
+      link: https://www.youtube.com/@MyEmbeddedWay/videos
+
+copyright: Copyright &copy; 2025 niwciu

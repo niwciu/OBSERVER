@@ -1,8 +1,27 @@
-/* observer_public_types.h
- * Author: niwciu (niwciu@gmail.com)
- * Date: 2025-10-20 (updated)
+/**
+ * @file observer_public_types.h
+ * @brief Public type definitions for the Observer library.
  *
- * Public types for observer module.
+ * @details
+ *   This header provides common type definitions, enumerations, and callback
+ *   function pointer declarations used by the Observer library. It is designed
+ *   for deterministic, safety-critical embedded applications conforming to
+ *   MISRA C and ISO 26262 guidelines.
+ *
+ * @version 1.0.0
+ * @date 2025-10-25
+ * @author
+ *   niwciu (niwciu@gmail.com)
+ *
+ * @copyright
+ *   Copyright (c) 2025
+ *
+ * @defgroup observer Observer Library
+ * @brief Deterministic observer pattern for embedded systems.
+ * @{
+ *
+ * @safety
+ *   This header defines types only; no runtime behavior is implemented.
  */
 
 #ifndef OBSERVER_PUBLIC_TYPES_H_
@@ -18,10 +37,11 @@ extern "C"
     /**
      * @brief Subscription operation status codes.
      *
-     * Note:
-     *  - OBSERVER_OK == 0 (success)
-     *  - OBSERVER_INVALID_ARGUMENT_ERROR indicates invalid input parameters (NULL pointers, zero size).
-     *  - OBSERVER_TABLE_FULL_ERROR indicates there were no free slots in the subscription table.
+     * @note
+     *   - OBSERVER_OK == 0 (success)
+     *   - OBSERVER_INVALID_ARGUMENT_ERROR indicates invalid input parameters.
+     *   - OBSERVER_TABLE_FULL_ERROR indicates no free slots available.
+     *   - OBSERVER_TABLE_EMPTY_ERROR indicates table has no valid entries.
      */
     typedef enum
     {
@@ -32,7 +52,7 @@ extern "C"
     } subscr_status_e;
 
     /**
-     * @brief Event state passed to state callbacks.
+     * @brief Event state passed to event_state_e callbacks.
      */
     typedef enum
     {
@@ -40,7 +60,9 @@ extern "C"
         EVENT_STATE_ENTER = 1u
     } event_state_e;
 
-    /* Callback types */
+    /* =========================================================================
+     * Callback type definitions
+     * ========================================================================= */
 
     /**
      * @brief Callback without arguments.
@@ -62,3 +84,5 @@ extern "C"
 #endif
 
 #endif /* OBSERVER_PUBLIC_TYPES_H_ */
+
+/** @} */ /* end of observer group */
