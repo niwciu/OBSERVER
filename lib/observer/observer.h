@@ -79,7 +79,7 @@ extern "C"
      *   by shifting subsequent entries left.
      *
      * @param[in,out] subscription_table Pointer to an array of observer_cb_t.
-     * @param[in] cb_2_register Callback function to remove.
+     * @param[in] cb_2_remove Callback function to remove.
      * @param[in] subscription_table_size Table length.
      *
      * @return OBSERVER_OK                    Callback successfully removed.
@@ -146,7 +146,7 @@ extern "C"
      *   Removes a previously registered callback from the table and compacts it.
      *
      * @param[in,out] subscription_table Pointer to array of observer_cb_state_t.
-     * @param[in] cb_2_register Callback function to remove.
+     * @param[in] cb_2_remove Callback function to remove.
      * @param[in] subscription_table_size Table length.
      *
      * @return OBSERVER_OK                    Callback removed.
@@ -213,7 +213,7 @@ extern "C"
      *   Removes a callback from the table and shifts subsequent entries left.
      *
      * @param[in,out] subscription_table Pointer to array of observer_cb_u8_arg_t.
-     * @param[in] cb_2_register Callback to remove.
+     * @param[in] cb_2_remove Callback to remove.
      * @param[in] subscription_table_size Table length.
      *
      * @return OBSERVER_OK                    Callback removed.
