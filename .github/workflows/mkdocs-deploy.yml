@@ -1,0 +1,101 @@
+name: Deploy MkDocs lib webpage
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Create docs Folder and subfolders
+        run: mkdir -p docs/reports docs/examples
+
+      - name: Download CCR artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          name: Code_Coverage_Report
+          repo: ${{ github.repository }}
+          workflow: CI_Pipeline.yml
+          path: ./docs/reports
+          search_artifacts: true
+
+      - name: Download CCM artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          name: Code_Complexity_Report
+          repo: ${{ github.repository }}
+          workflow: CI_Pipeline.yml
+          path: ./docs/reports
+          search_artifacts: true
+
+      - name: Copy README.md to docs/
+        run:  cp README.md docs/README.md
+
+      - name: Copy examples README.md to docs/
+        run:  cp ./examples/README.md docs/examples/README.md
+
+      - name: Generate Doxygen html doc
+        uses: mattnotmitt/doxygen-action@v1.9.5
+        with:
+            working-directory: './docs/doxygen'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs + Material
+        run: pip install mkdocs mkdocs-material
+
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  cleanup:
+    runs-on: ubuntu-latest
+    # if: github.event.pull_request.merged == true
+    permissions: write-all
+    steps:
+      - name: 🗑 Delete deployment
+        uses: strumwolf/delete-deployment-environment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: github-pages
+          onlyRemoveDeployments: true
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    # if: github.event.pull_request.merged == true
+    needs: [build, cleanup]
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
