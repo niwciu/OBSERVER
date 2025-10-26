@@ -35,21 +35,31 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 
 ```
 /observer_lib/
+├── .github/   
+│   └── workflows/                     # Github Actions workflows                            
+├── docs/                              # Files required for deploy library webpage & publish documentation
 ├── examples/
 │   ├── basic_observer/                # Basic no-arg callback
-│   ├── state_observer/                # Uses event_state_e argument
-│   └── observer_u8/                   # Uses uint8_t argument
-├── hw/
+│   ├── state_observer/                # Uses event_state_e argument callback
+│   ├── observer_u8/                   # Uses uint8_t argument callback
+│   └── README.md                      # Examples description file
+│ 
+├── hw/                                # Cpecific hardware configurations
 ├── lib/
 │   └── observer/
 │        ├── observer.c                # Core implementation
 │        ├── observer.h                # Public API
 │        └── observer_public_types.h   # Enums & callback typedefs
 ├── test/
+│   ├── config_scripts/ 
+│   │    ├── run_targets               # CI python script to run on local machine  
+│   │    └── venv_setup                # Python script for setting up venv and install dependencies            
 │   ├── observer/                      # Unit tests (Unity)
-│   ├── unity/                         # Test framework
-│   └── reports/                       # Coverage & complexity outputs
-├── LICENSE
+│   ├── template/                      # Module unit tests template
+│   └── unity/                         # Test framework
+├── .clang-format                      # clang-foramt rules
+├── LICENSE                             
+├── mkdocs.yml                         # MkDocs deploy settings 
 └── README.md
 ```
 
