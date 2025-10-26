@@ -18,7 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout base branch
         uses: actions/checkout@v4
@@ -78,7 +78,7 @@ jobs:
 
   cleanup:
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     permissions: write-all
     steps:
       - name: 🗑 Delete deployment
@@ -93,7 +93,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     needs: [build, cleanup]
     steps:
       - name: Deploy to GitHub Pages
