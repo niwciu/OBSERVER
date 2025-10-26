@@ -271,6 +271,12 @@ flowchart TD
 ```
 
 </center></td> </tr> </table>
+<br>
 
-```}
-```
+---
+
+<p style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/f4825882-e285-4e02-a75c-68fc86ff5716" alt="myEmbeddedWayBannerWhiteSmaller">
+</p>
+
+---
