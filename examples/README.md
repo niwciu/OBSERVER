@@ -1,12 +1,24 @@
 # Observer Library Examples Details
 
-This document provides detailed information for each example in the Observer Library. Each folder contains all source (`.c`) and header (`.h`) files, and the examples are MISRA-C / ISO 26262 compliant, using deterministic, static memory.
+This document provides detailed information for each example in the Observer Library. Each folder contains all source (`.c`) and header (`.h`) files. The examples are designed with **safety-oriented practices**, **MISRA-C:2012 compliant**, and use **deterministic static memory**. Terminal I/O is only used for demonstration and is **not MISRA-compliant**.
+
+---
+
+## 📁 Directory Layout
+
+```
+examples/
+├─ basic_observer/        # Basic Observer Example
+├─ state_observer/        # Observer with State Machine Example
+├─ observer_u8/           # Observer with uint8_t Notify Argument Example
+└─ ...                    # Other future examples
+```
 
 ---
 
 ## 1️⃣ Basic Observer Example
 
-* **Folder:** `examples/example_basic/`
+* **Folder:** `examples/basic_observer/`
 
 * **Purpose:** Demonstrates multiple observers reacting to a pushbutton event in a deterministic, MISRA-C compliant way.
 
@@ -22,17 +34,17 @@ This document provides detailed information for each example in the Observer Lib
 * **Detailed Description:**
   This example demonstrates a **basic observer pattern** in C. The system consists of a mock pushbutton event source and two observers: a mock LED and a mock LCD display. Each press of the 'c' key triggers a notification event:
 
-  1. The **pushbutton module** detects the key press and calls `notify()` only on **subscribed observers**.
-  2. The **LCD observer** prints a message indicating the key press.
-  3. The **LED observer** toggles its state and prints the new state.
+1. The **pushbutton module** detects the key press and calls `notify()` only on **subscribed observers**.
+2. The **LCD observer** prints a message indicating the key press.
+3. The **LED observer** toggles its state and prints the new state.
 
-  Deterministic **static subscription tables** are used to avoid dynamic memory allocation. Observer callbacks are independent. Terminal I/O uses POSIX calls only for simulation.
+**Static subscription tables** are used to avoid dynamic memory allocation. Observer callbacks are independent. Terminal I/O uses POSIX calls **for demonstration only**.
 
 * **Build & Run:**
 
   ```bash
-  cd examples/example_basic
-  cmake -S ./ -B out -G "Unix Makefiles"   # or cmake -S ./ -B out -G "Ninja"
+  cd examples/basic_observer
+  cmake -S ./ -B out -G "Unix Makefiles"   # or "Ninja"
   cd out
   make all        # or ninja
   make run        # or ninja run
@@ -51,7 +63,7 @@ This document provides detailed information for each example in the Observer Lib
 
   * Deterministic execution using **static memory**.
   * Observer callbacks are independent.
-  * Terminal I/O uses POSIX calls (non-MISRA) for simulation only.
+  * Terminal I/O uses POSIX calls **for demonstration only**, not MISRA-compliant.
 
 * **Relation Diagrams for Initialization and Main Loop Phases:**
 
@@ -110,7 +122,7 @@ flowchart TD
 
 ## 2️⃣ State Observer Example
 
-* **Folder:** `examples/example_state/`
+* **Folder:** `examples/state_observer/`
 
 * **Purpose:** Demonstrates `observer_enter_exit` API with a mock state machine alternating between ENTER and EXIT states.
 
@@ -123,13 +135,13 @@ flowchart TD
   | `mock_display.c/h`       | Prints messages on state transitions               |
 
 * **Detailed Description:**
-  This example demonstrates a state-change observer. The mock state machine toggles between `ENTER` and `EXIT` states at a fixed interval (1 second). Each time the state changes, all observers subscribed to state events are notified. The display observer prints a message indicating whether the state was entered or exited. Deterministic notifications, static memory usage, and safe observer execution are ensured.
+  The mock state machine toggles between `ENTER` and `EXIT` states at a fixed interval (1 second). Observers subscribed to state events are notified on every state change. The display observer prints a message indicating the current state. Deterministic notifications and **static subscription tables** ensure safe execution.
 
 * **Build & Run:**
 
   ```bash
-  cd examples/example_state
-  cmake -S ./ -B out -G "Unix Makefiles"   # or cmake -S ./ -B out -G "Ninja"
+  cd examples/state_observer
+  cmake -S ./ -B out -G "Unix Makefiles"   # or "Ninja"
   cd out
   make all        # or ninja
   make run        # or ninja run
@@ -145,9 +157,9 @@ flowchart TD
 
 * **Safety Notes:**
 
-  * Deterministic toggling between states
-  * Observers use static subscription tables
-  * Observer notification is thread-safe if externally protected
+  * Deterministic toggling between states.
+  * Observers use **static subscription tables**.
+  * Observer notifications are safe assuming **external synchronization**.
 
 * **Relation Diagrams for Initialization and Main Loop Phases:**
 
@@ -191,9 +203,9 @@ flowchart TD
 
 ---
 
-## 3️⃣ Observer with u8 Notify Arg Example
+## 3️⃣ Observer with uint8_t Notify Argument Example
 
-* **Folder:** `examples/example_u8_arg/`
+* **Folder:** `examples/observer_u8/`
 
 * **Purpose:** Demonstrates `observer_u8` API with periodic mock sensor updates.
 
@@ -206,13 +218,13 @@ flowchart TD
   | `mock_logger.c/h`       | Logs sensor value to stdout                             |
 
 * **Detailed Description:**
-  This example shows the observer pattern with `uint8_t` arguments. The mock sensor generates incrementing sensor values at a fixed interval (0.5 seconds). Each new sensor value is sent to all subscribed observers using the `observer_u8` API. The logger observer prints the sensor value to the terminal. Deterministic updates, static memory usage, and safe observer execution are ensured.
+  The mock sensor generates incrementing `uint8_t` values at a fixed interval (0.5 seconds). Each new sensor value is sent to all subscribed observers using the `observer_u8` API. The logger observer prints the sensor value to the terminal. Deterministic updates, **static memory**, and safe observer execution are ensured **when subscription tables are properly sized**.
 
 * **Build & Run:**
 
   ```bash
-  cd examples/example_u8_arg
-  cmake -S ./ -B out -G "Unix Makefiles"   # or cmake -S ./ -B out -G "Ninja"
+  cd examples/observer_u8
+  cmake -S ./ -B out -G "Unix Makefiles"   # or "Ninja"
   cd out
   make all        # or ninja
   make run        # or ninja run
@@ -228,9 +240,9 @@ flowchart TD
 
 * **Safety Notes:**
 
-  * Static memory only
-  * Deterministic updates
-  * Observer callbacks independent
+  * Static memory only.
+  * Deterministic updates.
+  * Observer callbacks independent.
 
 * **Relation Diagrams for Initialization and Main Loop Phases:**
 
