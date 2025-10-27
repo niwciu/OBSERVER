@@ -1,8 +1,11 @@
-![observer_header](https://github.com/user-attachments/assets/4c9970c9-6374-44e9-a40a-0a5bfc5a0b43)
+![observer\_header](https://github.com/user-attachments/assets/4c9970c9-6374-44e9-a40a-0a5bfc5a0b43)
 
-# 🧩 Observer Library (MISRA-C / Safety-Critical)
 
-A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** implementation of the **Observer Pattern** written in pure C — designed for **embedded**, **real-time**, and **safety-critical** applications (ISO 26262 / IEC 61508 / DO-178C).
+# 🧩 Observer Library (MISRA-C / Safety-Oriented Ready)
+
+A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** implementation of the **Observer Pattern** in pure C — designed for **embedded**, **real-time**, and **safety-oriented applications**.
+
+> ⚠️ Note: This library is **not certified** for ISO 26262, DO-178C, or any other formal safety standard. It provides a **deterministic, statically-allocated foundation** and demonstrates **best practices for safety-oriented software design**. Formal certification requires additional **safety analysis, risk assessment, and documentation**.
 
 ---
 
@@ -21,13 +24,18 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 
 ## 🚀 Key Features
 
-* ✅ **MISRA-C:2012** compliant (checked via *Cppcheck* and *PC-lint*)
-* ✅ **Zero dynamic memory** – uses only static tables
-* ✅ **Deterministic execution** – bounded by compile-time table size
-* ✅ **Thread-safe when externally synchronized**
-* ✅ **ASIL / DAL / SIL ready** — structured for safety-certified projects
-* ✅ **Defensive argument validation** in all public APIs
-* ✅ **100 % unit-test coverage** (Unity + gcovr)
+This library provides a deterministic, static-memory foundation for the Observer pattern, suitable for safety-oriented embedded systems. Its key characteristics include:
+
+* ✅ **MISRA-C:2012 compliant** – verified via *Cppcheck* and *PC-lint*  
+* ✅ **Zero dynamic memory allocation** – all subscription tables are statically allocated  
+* ✅ **Deterministic execution** – all operations bounded by compile-time table sizes  
+* ✅ **Externally synchronized thread-safety** – safe if caller manages access via mutex or critical section  
+* ✅ **Designed for safety-oriented projects** – demonstrates best practices in modularity, static memory, and defensive programming  
+* ✅ **Defensive argument validation** – all public API functions validate input parameters  
+* ✅ **Full unit test coverage** – 100% statement coverage verified with Unity and gcovr  
+* ✅ **Support for static analysis and complexity checks** – integrates with Cppcheck, Lizard, clang-format, and Doxygen for maintainability  
+
+> ⚠️ Note: While this library demonstrates safety-oriented design practices, it **is not formally certified**. Formal certification requires additional safety analysis, documentation, and risk assessment.
 
 ---
 
@@ -43,18 +51,17 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 │   ├── state_observer/                 # Uses event_state_e argument callback
 │   ├── observer_u8/                    # Uses uint8_t argument callback
 │   └── README.md                       # Examples description file
-│ 
-├── hw/                                 # Cpecific hardware configurations
+│
+├── hw/                                 # Specific hardware configurations
 ├── lib/
 │   └── observer/
-│       ├── observer.c                  # Core implementation
 │       ├── observer.c                  # Core implementation
 │       ├── observer.h                  # Public API
 │       └── observer_public_types.h     # Enums & callback typedefs
 ├── test/
-│   ├── config_scripts/ 
+│   ├── config_scripts/
 │   │   ├── run_targets               
-│   │   │   └── CI.py                   # CI python script to run on local machine 
+│   │   │   └── CI.py                   # CI python script to run on local machine
 │   │   │   └── config.yaml             # CI config file for setup and customize CI workflow    
 │   │   └── venv_setup                   
 │   │       └── requirements.txt        # Python tools required by scripts in project
@@ -62,26 +69,25 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 │   ├── observer/                       # Unit tests (Unity)
 │   ├── template/                       # Module unit tests template
 │   └── unity/                          # Test framework
-├── .clang-format                       # clang-foramt rules
+├── .clang-format                       # clang-format rules
 ├── LICENSE                             
-├── mkdocs.yml                          # MkDocs deploy settings 
+├── mkdocs.yml                          # MkDocs deploy settings
 └── README.md
 ```
 
-> All examples are **deterministic**, **static**, and self-contained.
+>⚠️ All examples are deterministic, statically allocated, and intended for demonstration purposes; they are not certified for safety-critical use.
 
 ---
+
 ## 🧩 Observer Library Examples
 
-This folder contains practical examples demonstrating how to integrate the **Observer library** into embedded-style applications using **static memory tables**.
-| Example         | Description                                                            | Folder                                     |
-| --------------- | ---------------------------------------------------------------------- | ------------------------------------------ |
-| Basic Observer  | Simple callback example using pushbutton, LED and LCD mocks            | [basic_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/basic_observer)   |
-| State Observer  | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [state_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/state_observer)   |
+| Example         | Description                                                            | Folder                                                                                              |
+| --------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Basic Observer  | Simple callback example using pushbutton, LED and LCD mocks            | [basic_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/basic_observer)      |
+| State Observer  | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [state_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/state_observer)      |
 | Sensor Observer | Observer with `uint8_t` argument demonstrating periodic sensor updates | [observer_notify_u8_arg_example](https://github.com/niwciu/OBSERVER/tree/main/examples/observer_u8) |
 
-> Each folder contains a complete `src/` with all C/H files and a common `README.md` with detailed instructions, expected output, and safety notes.  
-> For full information on building, running, and understanding the examples, see the [Examples Details README](examples/README.md).
+> Each folder contains a complete `src/` with all C/H files and a common `README.md` with detailed instructions and expected outputs.
 
 ---
 
@@ -207,7 +213,7 @@ subscr_status_e notify_u8(observer_cb_u8_arg_t *subscription_table,
 ---
 
 ## ⚙️ Running Library Targets
-
+### 🔍 Build library
 To build and run any of the predefined targets, follow this sequence of commands from the main project library location:
 
 ```bash
@@ -232,115 +238,80 @@ make all        # or use: ninja
 After building the library, you can run any of the predefined targets, such as:
 
 
-### 🧪 Run Unit Tests
+### 🔍 Run Analysis and Reports generation
 
-```bash
-make run
-```
+| Task | Command |
+|------|---------|
+| 🧪 Unit Tests | `make run` |
+| 🔍 Static Analysis (Cppcheck) | `make cppcheck` |
+| 📈 Cyclomatic Complexity | `make ccm` |
+| 📊 Code Coverage | `make ccc` |
+| 📈 Generate Cyclomatic Complexity report | `make ccmr` |
+| 📊 Generate Code Coverage report| `make ccr` |
+| ✨ Format library source | `make format` |
+| ✨ Format test code | `make format_test` |
 
----
-
-### 🔍 Run Static Analysis
-
-```bash
-make cppcheck
-```
-
----
-
-### 📈 Run Cyclomatic Complexity check
-
-```bash
-make ccm
-```
 
 ---
 
-### 📊 Run Code Coverage check
+## 🧰 Safety-Oriented Design Summary
 
-```bash
-make ccc
-```
+This library demonstrates safety-oriented design practices suitable for embedded, real-time, and safety-critical systems.
 
-### 📈 Generate Cyclomatic Complexity report
+* ✅ **Static memory only** — no dynamic allocation  
+* ✅ **Deterministic execution** — bounded by compile-time table size  
+* ✅ **Defensive input validation** — all public APIs validate arguments  
+* ✅ **Externally synchronized thread safety** — caller manages access if needed  
+* ✅ **MISRA-C:2012 compliant** — verified via static analysis  
+* ✅ **Portable** — GCC, IAR, ARMCC, GHS, etc.
 
-```bash
-make ccm
-```
-
----
-
-### 📊 Genearte Code Coverage report
-
-```bash
-make ccc
-```
-
-### ✨Format lib src with predefined library rules
-
-```bash
-make format
-```
-
----
-
-### ✨ Format lib test code with predefined library rules
-
-```bash
-make format_test
-```
-
----
-
-## 🧰 Safety and Compliance Summary
-
-* ✅ **Static memory only** — no heap or dynamic allocation
-* ✅ **Deterministic** — execution bounded by table size
-* ✅ **Input validation** — every function checks arguments
-* ✅ **Thread safety** — achieved externally if needed
-* ✅ **MISRA-C:2012** compliant and statically analyzed
-* ✅ **Portable** across GCC, IAR, ARMCC, GHS, etc.
+> ⚠️ Note: This summary demonstrates safety-oriented practices. **Formal certification (ISO 26262, DO-178C, or similar) requires additional safety analysis, risk assessment, and documentation.**
 
 ---
 
 ## ⚠️ Safety-Critical Compliance Matrix
 
-| ID   | Requirement                  |   Status  |
-| ---- | ---------------------------- | :-------: |
-| SC-1 | No dynamic memory usage      |     ✅     |
-| SC-2 | Deterministic control flow   |     ✅     |
-| SC-3 | Input validation on all APIs |     ✅     |
-| SC-4 | MISRA-C:2012 compliance      |     ✅     |
-| SC-5 | Unit test coverage ≥ 90 %    |     ✅     |
-| SC-6 | Thread safety documented     |     ✅     |
-| SC-7 | Static analysis clean        |     ✅     |
+| ID   | Requirement                          | Status |
+| ---- | ------------------------------------ | :----: |
+| SC-1 | No dynamic memory                     | ✅     |
+| SC-2 | Deterministic control flow            | ✅     |
+| SC-3 | Defensive input validation            | ✅     |
+| SC-4 | MISRA-C:2012 compliance               | ✅     |
+| SC-5 | Full unit test coverage (100 % stmt) | ✅     |
+| SC-6 | Externally synchronized thread safety| ✅     |
+| SC-7 | Static analysis clean                 | ✅     |
+
+> ⚠️ This matrix reflects safety-oriented practices. **Formal compliance requires additional safety documentation.**
+
 
 ---
 
 
 ## 🧩 Integration Examples
 
-The library includes **ready-to-run integration examples** located in the [`examples/`](examples/) directory. These examples demonstrate:
+The library provides **ready-to-run integration examples** in the [examples](examples/) directory. These demonstrate:
 
-* How to integrate the **Observer library** in an application.
-* Realistic usage patterns with **mocked embedded hardware modules** (e.g., pushbuttons, LEDs, sensors).
-* Deterministic behavior using **static observer tables**.
+* How to integrate the **Observer library** into an application.  
+* Realistic usage patterns with **mocked embedded hardware modules** (e.g., pushbuttons, LEDs, sensors).  
+* Deterministic behavior using **statically allocated observer tables**.
 
-> 💡 Each example contains **block diagrams** and **commented code** explaining the module interactions, subscription flow, and event notifications.
+>💡 Each example includes **block diagrams** and **commented code** explaining module interactions, subscription flow, and event notifications.
 
-For detailed guidance and diagrams, see the [`examples/README.md`](examples/README.md) file.
-
+See [examples/README.md](examples/README.md) for detailed guidance and diagrams.
+>⚠️ All examples are demonstrations of deterministic behavior using statically allocated tables; they are not certified for safety-critical use.
 
 ---
 
 ### 🧠 Notes
 
 * **Publisher** owns the static subscription table.  
-* **Subscribers** register their callbacks using the publisher’s API.  
-* All operations are **deterministic** — no dynamic allocation or recursion.  
-* Fully compliant with **MISRA-C** and **safety-critical** software design principles.  
+* **Subscribers** register callbacks using the publisher’s API.  
+* All operations are **deterministic** and **zero-dynamic-memory**.  
+* Designed following **MISRA-C:2012** and **safety-oriented** software design practices.  
 
-> ✅ Clean modular separation and static memory usage make this design ideal for real-time and safety-critical embedded systems.
+> ✅ The clean modular separation and static memory usage make these examples ideal for real-time, embedded, and safety-oriented applications.  
+> ⚠️ Note: This demonstrates safety-oriented practices; the library is **not certified**.
+
 
 ---
 
