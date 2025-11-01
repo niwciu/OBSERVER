@@ -415,6 +415,9 @@ Released under the **MIT License** — see [`LICENSE`](LICENSE).
 
 <p style="text-align: center;">
   <img src="https://github.com/user-attachments/assets/f4825882-e285-4e02-a75c-68fc86ff5716" alt="myEmbeddedWayBanner">
+  <p align="center">
+  <i>Part of the <b>myEmbeddedWay</b> safety-oriented C library collection.</i>
+</p>
 </p>
 
 ---
