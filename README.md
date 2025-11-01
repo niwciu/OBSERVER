@@ -16,9 +16,23 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 ![CI Pipeline](https://github.com/niwciu/OBSERVER/actions/workflows/CI_Pipeline.yml/badge.svg)
 ![MISRA](https://img.shields.io/badge/MISRA-C%3A2012-blue)
 
-<b><a href='https://niwciu.github.io/OBSERVER/reports/gcovr.html'>Library GCOVR Report</a></b> <br>
-<b><a href='https://niwciu.github.io/OBSERVER/reports/code_complexity_report.html'>Library Code Complexity Report</a></b><br>
-<b><a href='https://niwciu.github.io/OBSERVER/doxygen/observer_lib_doc/html/index.html'>Library Doxygen Documentation</a></b>
+## 🌐 Online Documentation
+
+Looking for a better browsing experience?  
+
+<p align="center">
+  <b>📘 Explore the full documentation at:</b><br>
+  <a href="https://niwciu.github.io/OBSERVER">
+    🌐 https://niwciu.github.io/OBSERVER
+  </a><br>
+  <i>Includes Doxygen docs, examples, coverage and analysis reports.</i>
+</p> 
+
+Additional reports and analysis:
+- 📊 [GCOVR Report (Code Coverage)](https://niwciu.github.io/OBSERVER/reports/gcovr.html)  
+- 📈 [Code Complexity Report](https://niwciu.github.io/OBSERVER/reports/code_complexity_report.html)
+
+> 💡 **Recommended:** The web version provides full navigation, diagrams, and integration examples with better readability.
 
 ---
 
@@ -36,6 +50,72 @@ This library provides a deterministic, static-memory foundation for the Observer
 * ✅ **Support for static analysis and complexity checks** – integrates with Cppcheck, Lizard, clang-format, and Doxygen for maintainability  
 
 > ⚠️ Note: While this library demonstrates safety-oriented design practices, it **is not formally certified**. Formal certification requires additional safety analysis, documentation, and risk assessment.
+
+---
+
+
+## 🧠 Observer Design Pattern – Concept Overview
+
+The **Observer Pattern** defines a one-to-many dependency between objects so that when one object (the *Publisher*) changes state, all its dependent objects (the *Observers*) are notified automatically.
+
+In embedded and safety-oriented systems, this pattern enables **deterministic event propagation** without dynamic allocation or runtime discovery.
+
+### 🧩 Conceptual Flow
+
+```mermaid
+
+flowchart TD
+    A[Publisher / Event Source]
+    B[Observer #1]
+    C[Observer #2]
+    D[Observer #3]
+
+    %% Subscriptions
+    B -->|subscribe| A
+    C -->|subscribe| A
+    D -->|subscribe| A
+
+    %% Notifications
+    A -->|notify| B
+    A -->|notify| C
+    A -->|notify| D
+
+    style A fill:#444444,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style B fill:#666666,stroke:#ffffff,stroke-width:1px,color:#ffffff
+    style C fill:#666666,stroke:#ffffff,stroke-width:1px,color:#ffffff
+    style D fill:#666666,stroke:#ffffff,stroke-width:1px,color:#ffffff
+
+```
+> 💡 **How it works:** Observers register their callbacks in a static subscription table owned by the Publisher.  
+> When an event occurs, the Publisher calls `notify()` deterministically.  
+> No dynamic memory or recursion is used — all behavior is bounded at compile time.
+
+
+---
+
+## 🧩 Integration & Observer Library Examples
+
+The library provides **ready-to-run integration examples** in the [`examples`](examples/) directory.  
+These demonstrate:
+
+* How to integrate the **Observer library** into an application.  
+* Realistic usage patterns with **mocked embedded hardware modules** (e.g., pushbuttons, LEDs, sensors).  
+* Deterministic behavior using **statically allocated observer tables** and **MISRA-C:2012 compliant** design.
+
+> 💡 Each example includes **block diagrams** and **commented code** explaining module interactions, subscription flow, and event notifications.
+
+### 📘 Available Examples
+
+| Example | Description | Folder |
+|:--|:--|:--|
+| **Basic Observer** | Simple callback example using pushbutton, LED and LCD mocks | [🔗 Open basic_observer](https://github.com/niwciu/OBSERVER/tree/main/examples/basic_observer) |
+| **State Observer** | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [🔗 Open state_observer](https://github.com/niwciu/OBSERVER/tree/main/examples/state_observer) |
+| **Sensor Observer** | Observer with `uint8_t` argument demonstrating periodic sensor updates | [🔗 Open observer_u8](https://github.com/niwciu/OBSERVER/tree/main/examples/observer_u8) |
+
+> 💡 Each example includes **block diagrams** and **commented code** explaining module interactions, subscription flow, and event notifications.  
+> ⚠️ All examples demonstrate **deterministic behavior** using statically allocated tables and are **not certified for safety-critical use**.  
+> ℹ️ See [`examples/README.md`](examples/README.md) for detailed explanations and flow diagrams.
+
 
 ---
 
@@ -75,19 +155,30 @@ This library provides a deterministic, static-memory foundation for the Observer
 └── README.md
 ```
 
->⚠️ All examples are deterministic, statically allocated, and intended for demonstration purposes; they are not certified for safety-critical use.
+>⚠️ Note: All examples are deterministic, statically allocated, and intended for demonstration purposes; they are not certified for safety-critical use.
 
 ---
 
-## 🧩 Observer Library Examples
+### 🔧 Core Concepts
 
-| Example         | Description                                                            | Folder                                                                                              |
-| --------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Basic Observer  | Simple callback example using pushbutton, LED and LCD mocks            | [basic_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/basic_observer)      |
-| State Observer  | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [state_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/state_observer)      |
-| Sensor Observer | Observer with `uint8_t` argument demonstrating periodic sensor updates | [observer_notify_u8_arg_example](https://github.com/niwciu/OBSERVER/tree/main/examples/observer_u8) |
+| Role       | Responsibility |
+| ----------- | -------------- |
+| **Publisher** | Maintains a static table of observer callbacks and notifies them upon events. |
+| **Observer**  | Registers a callback function to receive event notifications. |
+| **Event**     | A deterministic trigger (button press, state change, sensor update). |
 
-> Each folder contains a complete `src/` with all C/H files and a common `README.md` with detailed instructions and expected outputs.
+### ⚙️ Why This Implementation Is Different
+
+Unlike typical dynamic implementations, this library is:
+
+- **Zero-dynamic-memory** — all subscription tables are statically allocated.  
+- **MISRA-C:2012 compliant** — validated through Cppcheck and PC-lint.  
+- **Deterministic** — every operation bounded at compile time.  
+- **Safety-oriented** — promotes traceability and modular isolation of side effects.  
+
+> 💡 This implementation bridges the conceptual simplicity of the Observer Pattern with the rigorous requirements of **safety-critical embedded software**.
+
+For detailed integration examples, see [🧩 Observer Library Examples](examples/README.md).
 
 ---
 
@@ -286,22 +377,6 @@ This library demonstrates safety-oriented design practices suitable for embedded
 
 ---
 
-
-## 🧩 Integration Examples
-
-The library provides **ready-to-run integration examples** in the [examples](examples/) directory. These demonstrate:
-
-* How to integrate the **Observer library** into an application.  
-* Realistic usage patterns with **mocked embedded hardware modules** (e.g., pushbuttons, LEDs, sensors).  
-* Deterministic behavior using **statically allocated observer tables**.
-
->💡 Each example includes **block diagrams** and **commented code** explaining module interactions, subscription flow, and event notifications.
-
-See [examples/README.md](examples/README.md) for detailed guidance and diagrams.
->⚠️ All examples are demonstrations of deterministic behavior using statically allocated tables; they are not certified for safety-critical use.
-
----
-
 ### 🧠 Notes
 
 * **Publisher** owns the static subscription table.  
@@ -340,6 +415,9 @@ Released under the **MIT License** — see [`LICENSE`](LICENSE).
 
 <p style="text-align: center;">
   <img src="https://github.com/user-attachments/assets/f4825882-e285-4e02-a75c-68fc86ff5716" alt="myEmbeddedWayBanner">
+  <p align="center">
+  <i>Part of the <b>myEmbeddedWay</b> safety-oriented C library collection.</i>
+</p>
 </p>
 
 ---
