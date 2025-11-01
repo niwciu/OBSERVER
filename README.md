@@ -16,9 +16,23 @@ A **deterministic**, **zero-dynamic-memory**, and **MISRA-C:2012 compliant** imp
 ![CI Pipeline](https://github.com/niwciu/OBSERVER/actions/workflows/CI_Pipeline.yml/badge.svg)
 ![MISRA](https://img.shields.io/badge/MISRA-C%3A2012-blue)
 
-<b><a href='https://niwciu.github.io/OBSERVER/reports/gcovr.html'>Library GCOVR Report</a></b> <br>
-<b><a href='https://niwciu.github.io/OBSERVER/reports/code_complexity_report.html'>Library Code Complexity Report</a></b><br>
-<b><a href='https://niwciu.github.io/OBSERVER/doxygen/observer_lib_doc/html/index.html'>Library Doxygen Documentation</a></b>
+## 🌐 Online Documentation
+
+Looking for a better browsing experience?  
+
+<p align="center">
+  <b>📘 Explore the full documentation at:</b><br>
+  <a href="https://niwciu.github.io/OBSERVER">
+    🌐 https://niwciu.github.io/OBSERVER
+  </a><br>
+  <i>Includes Doxygen docs, examples, coverage and analysis reports.</i>
+</p> 
+
+Additional reports and analysis:
+- 📊 [GCOVR Report (Code Coverage)](https://niwciu.github.io/OBSERVER/reports/gcovr.html)  
+- 📈 [Code Complexity Report](https://niwciu.github.io/OBSERVER/reports/code_complexity_report.html)
+
+> 💡 **Recommended:** The web version provides full navigation, diagrams, and integration examples with better readability.
 
 ---
 
