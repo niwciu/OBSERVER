@@ -39,6 +39,72 @@ This library provides a deterministic, static-memory foundation for the Observer
 
 ---
 
+
+## 🧠 Observer Design Pattern – Concept Overview
+
+The **Observer Pattern** defines a one-to-many dependency between objects so that when one object (the *Publisher*) changes state, all its dependent objects (the *Observers*) are notified automatically.
+
+In embedded and safety-oriented systems, this pattern enables **deterministic event propagation** without dynamic allocation or runtime discovery.
+
+### 🧩 Conceptual Flow
+
+```mermaid
+
+flowchart TD
+    A[Publisher / Event Source]
+    B[Observer #1]
+    C[Observer #2]
+    D[Observer #3]
+
+    %% Subscriptions
+    B -->|subscribe| A
+    C -->|subscribe| A
+    D -->|subscribe| A
+
+    %% Notifications
+    A -->|notify| B
+    A -->|notify| C
+    A -->|notify| D
+
+    style A fill:#444444,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style B fill:#666666,stroke:#ffffff,stroke-width:1px,color:#ffffff
+    style C fill:#666666,stroke:#ffffff,stroke-width:1px,color:#ffffff
+    style D fill:#666666,stroke:#ffffff,stroke-width:1px,color:#ffffff
+
+```
+> 💡 **How it works:** Observers register their callbacks in a static subscription table owned by the Publisher.  
+> When an event occurs, the Publisher calls `notify()` deterministically.  
+> No dynamic memory or recursion is used — all behavior is bounded at compile time.
+
+
+---
+
+## 🧩 Integration & Observer Library Examples
+
+The library provides **ready-to-run integration examples** in the [`examples`](examples/) directory.  
+These demonstrate:
+
+* How to integrate the **Observer library** into an application.  
+* Realistic usage patterns with **mocked embedded hardware modules** (e.g., pushbuttons, LEDs, sensors).  
+* Deterministic behavior using **statically allocated observer tables** and **MISRA-C:2012 compliant** design.
+
+> 💡 Each example includes **block diagrams** and **commented code** explaining module interactions, subscription flow, and event notifications.
+
+### 📘 Available Examples
+
+| Example | Description | Folder |
+|:--|:--|:--|
+| **Basic Observer** | Simple callback example using pushbutton, LED and LCD mocks | [🔗 Open basic_observer](https://github.com/niwciu/OBSERVER/tree/main/examples/basic_observer) |
+| **State Observer** | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [🔗 Open state_observer](https://github.com/niwciu/OBSERVER/tree/main/examples/state_observer) |
+| **Sensor Observer** | Observer with `uint8_t` argument demonstrating periodic sensor updates | [🔗 Open observer_u8](https://github.com/niwciu/OBSERVER/tree/main/examples/observer_u8) |
+
+> 💡 Each example includes **block diagrams** and **commented code** explaining module interactions, subscription flow, and event notifications.  
+> ⚠️ All examples demonstrate **deterministic behavior** using statically allocated tables and are **not certified for safety-critical use**.  
+> ℹ️ See [`examples/README.md`](examples/README.md) for detailed explanations and flow diagrams.
+
+
+---
+
 ## 📁 Directory Layout
 
 ```
@@ -75,19 +141,30 @@ This library provides a deterministic, static-memory foundation for the Observer
 └── README.md
 ```
 
->⚠️ All examples are deterministic, statically allocated, and intended for demonstration purposes; they are not certified for safety-critical use.
+>⚠️ Note: All examples are deterministic, statically allocated, and intended for demonstration purposes; they are not certified for safety-critical use.
 
 ---
 
-## 🧩 Observer Library Examples
+### 🔧 Core Concepts
 
-| Example         | Description                                                            | Folder                                                                                              |
-| --------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Basic Observer  | Simple callback example using pushbutton, LED and LCD mocks            | [basic_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/basic_observer)      |
-| State Observer  | Observer with `event_state_e` argument demonstrating ENTER/EXIT states | [state_observer_example](https://github.com/niwciu/OBSERVER/tree/main/examples/state_observer)      |
-| Sensor Observer | Observer with `uint8_t` argument demonstrating periodic sensor updates | [observer_notify_u8_arg_example](https://github.com/niwciu/OBSERVER/tree/main/examples/observer_u8) |
+| Role       | Responsibility |
+| ----------- | -------------- |
+| **Publisher** | Maintains a static table of observer callbacks and notifies them upon events. |
+| **Observer**  | Registers a callback function to receive event notifications. |
+| **Event**     | A deterministic trigger (button press, state change, sensor update). |
 
-> Each folder contains a complete `src/` with all C/H files and a common `README.md` with detailed instructions and expected outputs.
+### ⚙️ Why This Implementation Is Different
+
+Unlike typical dynamic implementations, this library is:
+
+- **Zero-dynamic-memory** — all subscription tables are statically allocated.  
+- **MISRA-C:2012 compliant** — validated through Cppcheck and PC-lint.  
+- **Deterministic** — every operation bounded at compile time.  
+- **Safety-oriented** — promotes traceability and modular isolation of side effects.  
+
+> 💡 This implementation bridges the conceptual simplicity of the Observer Pattern with the rigorous requirements of **safety-critical embedded software**.
+
+For detailed integration examples, see [🧩 Observer Library Examples](examples/README.md).
 
 ---
 
@@ -283,22 +360,6 @@ This library demonstrates safety-oriented design practices suitable for embedded
 
 > ⚠️ This matrix reflects safety-oriented practices. **Formal compliance requires additional safety documentation.**
 
-
----
-
-
-## 🧩 Integration Examples
-
-The library provides **ready-to-run integration examples** in the [examples](examples/) directory. These demonstrate:
-
-* How to integrate the **Observer library** into an application.  
-* Realistic usage patterns with **mocked embedded hardware modules** (e.g., pushbuttons, LEDs, sensors).  
-* Deterministic behavior using **statically allocated observer tables**.
-
->💡 Each example includes **block diagrams** and **commented code** explaining module interactions, subscription flow, and event notifications.
-
-See [examples/README.md](examples/README.md) for detailed guidance and diagrams.
->⚠️ All examples are demonstrations of deterministic behavior using statically allocated tables; they are not certified for safety-critical use.
 
 ---
 
